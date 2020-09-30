@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block header_bg %}url({{ url_for('static', filename='project.jpg') }}){% endblock %}
+
+{% block header_text %}Projects{% endblock %}
+
+{% block content %}
+
+    <div class="tab-switcher">
+        <div class="tab-link" data-target="tab-pan-private">
+            Private
+        </div>
+        <div class="tab-link" data-target="tab-pan-work">
+            Work
+        </div>
+        <div class="tab-link" data-target="tab-pan-study">
+            Study
+        </div>
+
+    </div>
+
+    <div class="tab-pan" id="tab-pan-private">
+        <div class="project-items-container">
+            <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name">
+                            e-Board
+                        </div>
+                        <div class="project-item-updated">
+                            2 days ago
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name project-private">
+                            e-Board
+                        </div>
+                        <div class="project-item-updated">
+                            2 days ago
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="project-item-wrapper">
+                <a class="project-item" href="#">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name">
+                            e-Board
+                        </div>
+                        <div class="project-item-updated">
+                            2 days ago
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="project-item-wrapper">
+                <a class="project-item" href="#">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name">
+                            e-Board
+                        </div>
+                        <div class="project-item-updated">
+                            2 days ago
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="tab-pan" id="tab-pan-work">
+        <button class="btn-block">Add new</button>
+
+        <div class="project-items-container">
+            <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name">
+                            e-Board
+                        </div>
+                        <div class="project-item-updated">
+                            2 days ago
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pan" id="tab-pan-study">
+
+    </div>
+
+
+
+
+{% endblock %}

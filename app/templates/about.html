@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}DanikTL{% endblock %}
+
+{% block header_bg %}url({{ url_for('static', filename='me.PNG') }}){% endblock %}
+
+{% block header_text %}DanikTL{% endblock %}
+
+{% block content %}
+<div class="paragraph">
+Hi. I'm Daniel. I'm programmer and love to solve different tasks. This website contains some of my projects (probably here will be name with description and link on the GitHub repository).
+Also I use this page to provide my university schedule and unnecessary information about teachers and other helpful things. This page is under construction... So you'll see updates each day.
+If you have proposition, question or anything else - <a href="{{ url_for('contact_page') }}">contact</a> me.
+</div>
+{% endblock %}

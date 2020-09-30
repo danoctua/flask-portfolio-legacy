@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block barcolor %}#B4F1FF{% endblock %}
+{% block barcolor1 %}#B4F1FF{% endblock %}
+{% block barcolor2 %}#B4F1FF{% endblock %}
+
+{% block title %} WEB updates{% endblock %}
+
+{% block content %}
+<div style="padding-top:70px; padding-bottom: 70px">
+    <center><a>
+        <a style="font-size: x-large">
+            Check web-updates
+        </a>
+        {% if state == 'working' %}
+        <span class="badge badge-success">working</span>
+        {% elif state == 'sleep' %}
+        <span class="badge badge-warning">sleep</span>
+        {% elif state == 'error' %}
+        <span class="badge badge-danger">error</span>
+        {% elif state == 'off' %}
+        <span class="badge badge-secondary">off</span>
+        {% else %}
+        {% endif %}
+
+    </a></center>
+</div>
+<form method="post">
+    {% if bot_on %}
+    <button class="btn btn-danger" name="bot-change">Turn off</button>
+    {% else %}
+    <button class="btn btn-success" name="bot-change">Turn on</button>
+    {% endif %}
+</form>
+
+<div style="padding-top: 30px">
+<p>
+    List of the pages scrapped
+</p>
+<table class="table table-sm table-stripped">
+    <thead>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th class="col-additional">
+            URL
+        </th>
+        <th>
+            Selector
+        </th>
+        <th>
+            Last checked
+        </th>
+        <th>
+            Last changed
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for note_id in db.keys() %}
+    <tr>
+        <th>
+            {{ db[note_id]['name'] }}
+        </th>
+        <th class="col-additional">
+            {{ db[note_id]['url'] }}
+        </th>
+        <th>
+            {{ db[note_id]['selector'] }}
+        </th>
+        <th>
+            {{ db[note_id]['last_checked'] }}
+        </th>
+        <th>
+            {{ db[note_id]['last_changed'] }}
+        </th>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+</div>
+
+{% endblock %}

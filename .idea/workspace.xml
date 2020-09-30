@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bf180694-936b-49df-8208-e1a182213067" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="641ce498-77d3-4ac6-8ce9-83f69b46f8dc" />
+  <component name="ProjectId" id="1i8LdcHNJT5YONq5Bvj8GHYabi4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="daniktl" type="Python.FlaskServer">
+      <module name="daniktl" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bf180694-936b-49df-8208-e1a182213067" name="Default Changelist" comment="" />
+      <created>1601284361191</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601284361191</updated>
+      <workItem from="1601284365497" duration="35021000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="726" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601289360010">
+      <screen x="66" y="27" width="1854" height="1053" />
+    </state>
+    <state x="726" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/66.27.1854.1053@66.27.1854.1053" timestamp="1601289360010" />
+    <state x="628" y="331" width="719" height="452" key="EditFileWatcherDialog" timestamp="1601305957897">
+      <screen x="66" y="27" width="1854" height="1053" />
+    </state>
+    <state x="628" y="331" width="719" height="452" key="EditFileWatcherDialog/66.27.1854.1053@66.27.1854.1053" timestamp="1601305957897" />
+    <state x="776" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601464785043">
+      <screen x="66" y="27" width="3220" height="1053" />
+    </state>
+    <state x="776" y="311" width="424" height="491" key="FileChooserDialogImpl/66.27.3220.1053@66.27.3220.1053" timestamp="1601464785043" />
+    <state x="559" y="154" width="857" height="806" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601368299255">
+      <screen x="66" y="27" width="3220" height="1053" />
+    </state>
+    <state x="559" y="154" width="857" height="806" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/66.27.3220.1053@66.27.3220.1053" timestamp="1601368299255" />
+    <state x="515" y="279" width="1317" height="644" key="find.popup" timestamp="1601457381661">
+      <screen x="66" y="27" width="3220" height="1053" />
+    </state>
+    <state x="614" y="231" width="758" height="644" key="find.popup/66.27.1854.1053@66.27.1854.1053" timestamp="1601311311904" />
+    <state x="515" y="279" width="1317" height="644" key="find.popup/66.27.3220.1053@66.27.3220.1053" timestamp="1601457381661" />
+    <state x="166" y="127" width="1654" height="853" key="git4idea.log.GitShowExternalLogAction" timestamp="1601465004419">
+      <screen x="66" y="27" width="3220" height="1053" />
+    </state>
+    <state x="166" y="127" width="1654" height="853" key="git4idea.log.GitShowExternalLogAction/66.27.3220.1053@66.27.3220.1053" timestamp="1601465004419" />
+    <state x="656" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1601459847577">
+      <screen x="66" y="27" width="3220" height="1053" />
+    </state>
+    <state x="656" y="259" width="672" height="678" key="search.everywhere.popup/66.27.3220.1053@66.27.3220.1053" timestamp="1601459847577" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/static/actions.js</url>
+          <line>67</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}" sizes="16x16">
+{#    <link rel="manifest" href="/manifest.json">#}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    {#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"#}
+    {#            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"#}
+    {#            crossorigin="anonymous"></script>#}
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"#}
+    {#          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,500,600"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,600"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{{ url_for('static', filename='actions.js') }}?v=1.2.4" type="application/javascript"></script>
+
+
+    <style>
+        :root {
+            --google-ico-dark: url({{ url_for('static', filename='google-ico-dark.png') }});
+            --google-ico-light: url({{ url_for('static', filename='google-ico-light.png') }});
+        }
+    </style>
+
+    <script src="{{ url_for('static', filename='actions.js') }}?v={{ version }}"
+            type="application/javascript"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ version }}" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+    {% block script_include %}
+    {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-div" id="login-div">
+
+    <div class="login-content-div" id="login-content-div">
+        <div class="login-close">
+            <a href="javascript:void(0)" id="login-close-btn" onclick="hideLogin()">
+                <img src="{{ url_for('static', filename='close.png') }}" class="png-ico icon-dark">
+            </a>
+        </div>
+        <div class="login-content">
+            <div class="google-ico"></div>
+            <div><a href="№">Login with Google</a></div>
+            {#                <div><a href="{{ url_for('google_login', start=current_function) }}">Login with Google</a></div>#}
+            <div>or</div>
+            <div><a href="#">Ask for access</a></div>
+
+        </div>
+    </div>
+</div>
+
+<div class="nav-wrapper">
+    <div id="mySidenav" class="nav">
+        <!--    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+        {#    <div class="home-toogler" id="home-toogler">#}
+        {#        <a href="{{ url_for('index') }}" style="border: none">#}
+        {#            <img class="toogler-png icon-dark"#}
+        {#                 id="home-toogler-png"#}
+        {#                 src="{{ url_for('static', filename='home_main.png') }}">#}
+        {#        </a>#}
+        {#    </div>#}
+        <div class="nav-item">
+            <a class="nav-link" href="{{ url_for("home") }}">DanikTL</a>
+        </div>
+        <div class="splitter-space"></div>
+        <div class="nav-item">
+            <a class="nav-link" href="{{ url_for("projects_page") }}">Projects</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="{{ url_for("studies_page") }}">Studies</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="{{ url_for("contact_page") }}">Contact</a>
+        </div>
+        {% if not current_user.is_authenticated %}
+            <div id="nav-login" class="nav-item">
+                <div class="nav-link" onclick="showLogin()">Login</div>
+                <div class="login-container">
+                </div>
+            </div>
+
+        {% else %}
+            <div id="nav-logout" class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout_page', start=current_function) }}">Logout</a>
+            </div>
+        {% endif %}
+
+{#        <div class="splitter-space"></div>#}
+{#        <div class="theme-switch-wrapper">#}
+{#            <label class="theme-switch" for="checkbox">#}
+{#                <input type="checkbox" id="checkbox"/>#}
+{#                <div class="slider round"></div>#}
+{#            </label>#}
+{#            <em>Dark Mode</em>#}
+{#        </div>#}
+
+        <div class="navbar-copyright">© 2020 DanikTL</div>
+    </div>
+</div>
+{% if notification %}
+
+    <div class="notification-div the-blur" id="notification-div">
+        <div class="notification-status" id="notification-status">{% block notification_status %}
+            {{ notification[0] }}{% endblock %}</div>
+        <div class="notification-close" onclick="hideNotification()"></div>
+        <div class="notification-content" id="notification-content">
+            {% block notification %}{{ notification[1] }}{% endblock %}
+        </div>
+        <div class="notification-timer" id="notification-timer">
+
+        </div>
+    </div>
+{% endif %}
+
+<div class="nav-icon" id="nav-toogler" onclick="hideCloseNav(this)">
+    <div></div>
+</div>
+
+<div class="header overlay" id="header">
+
+    <div class="header-image-div"
+         style="background-image: {% block header_bg %}url({{ url_for('static', filename='temple.JPG') }}){% endblock %}">
+
+    </div>
+    <a class="header-text" id="header-text">{% block header_text %}DanikTL{% endblock %}</a>
+</div>
+
+<div class="container-my" id="container">
+    <div id="arrow-up-nav" class="arrow-up-div" onclick="toTheTop()">
+            <span class="png-btn" href="javascript:void(0)"><img
+                    class="container_up_arrow reverse icon-dark" id="container_up_arrow"
+                    src="{{ url_for('static', filename='arrow_up.ico') }}">
+            </span>
+    </div>
+    <div class="the-blur hide" id="blur-header"></div>
+    {% block content %}
+    {% endblock %}
+</div>
+
+
+{% block footer %}
+
+    <div class="footer">
+        <div class="footer-top">
+
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © 2020 DanikTL
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+</body>
+</html>

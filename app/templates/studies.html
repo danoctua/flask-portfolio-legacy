@@ -1,0 +1,441 @@
+{% extends 'base.html' %}
+
+{% block script_include %}
+    <script src="{{ url_for('static', filename='studies.js') }}?v={{ version }}" type="application/javascript"></script>
+
+{% endblock %}
+
+{% block title %}Studies{% endblock %}
+
+{% block header_bg %}url({{ url_for('static', filename='study.jpg') }}){% endblock %}
+
+{% block header_text %}Studies{% endblock %}
+
+{% block content %}
+
+
+    <table class="info-table">
+        <tbody>
+        <tr>
+            <th class="info-question">
+                School
+            </th>
+            <th class="info-answer">
+                <a href="https://www.put.poznan.pl/">Politechnika Poznańska</a>
+            </th>
+        </tr>
+
+        <tr>
+            <th class="info-question">
+                Faculty
+            </th>
+            <th class="info-answer">
+                <a href="https://fc.put.poznan.pl">Computer Science</a>
+            </th>
+        </tr>
+
+        <tr>
+            <th class="info-question">
+                Start year
+            </th>
+            <th class="info-answer">
+                <a href="https://www.facebook.com/groups/infipp17">2017</a>
+            </th>
+        </tr>
+
+        <tr>
+            <th class="info-question">
+                Group
+            </th>
+            <th class="info-answer">
+                <a>L1</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div>
+        <div class="section" id="schedule-section">
+            <div class="section-header">
+                <div class="section-header-image" style="--bd-color: #6285ff">
+                    <img class="section-header-image-icon" src="{{ url_for('static', filename='calendar.png') }}">
+                </div>
+                <div class="section-header-text">
+                    Schedule
+                </div>
+            </div>
+            <div class="section-content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur at blanditiis culpa
+                dolor
+                doloribus eos eum, ex explicabo perferendis reiciendis unde, vel veritatis. Aspernatur debitis odit sint
+                voluptate? Maiores.
+            </div>
+        </div>
+
+
+        <div class="section" id="tests-section">
+            <div class="section-header">
+                <div class="section-header-image" style="--bd-color: #ff5b60">
+                    <img class="section-header-image-icon" src="{{ url_for('static', filename='exams.png') }}">
+                </div>
+                <div class="section-header-text">
+                    Tests / Exams
+                </div>
+            </div>
+            <div class="section-content">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam, aspernatur dolorum nesciunt non
+                nostrum quibusdam rem tempore? Aliquam animi, aperiam delectus est impedit officia optio perferendis
+                possimus sit tempore!
+            </div>
+        </div>
+
+
+        <div class="section" id="teachers-section">
+            <div class="section-header">
+                <div class="section-header-image" style="--bd-color: #feff7f">
+                    <img class="section-header-image-icon" src="{{ url_for('static', filename='teacher.png') }}">
+                </div>
+                <div class="section-header-text">
+                    Teachers
+                </div>
+            </div>
+            <div class="subsection-header">
+
+                <div class="subsection-header-text">
+                    Current semester
+                </div>
+            </div>
+            <div class="section-content">
+                <form method="post" enctype="multipart/form-data" class="new-item-menu" id="new-item-menu">
+                    <div class="new-item-toogler" onclick="showIt('new-item-menu')">
+                        <div class="new-item-icon icon-dark"></div>
+                        Add new subject
+                    </div>
+                    <div class="new-item-content" id="new-item-subject">
+                        <div class="input-group">
+                            <input type="text" name="name" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Name"></span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="short" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Abbreviation"></span>
+                        </div>
+
+                        <div class="input-group">
+
+                            <select name="exam">
+                                <option value="1">Yes</option>
+                                <option value="0" selected>No</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group bad">
+                            <input type="text" id="new-subject-teacher" name="teacher" onfocus="inputFocus(this)"
+                                   onblur="inputBlur(this)"
+                                   onkeyup="findOptionInput(this)">
+                            <span data-placeholder="Teacher"></span>
+                        </div>
+                        <input name="new-subject-teacher-id" id="new-subject-teacher-hidden" hidden>
+
+                        <div class="option-list">
+                            {% for teacher in teachers %}
+                                <div id="new-subject-teacher-select-{{ teacher.id }}" class="option-list-option"
+                                     onclick="fillNewInput(this)">
+                                    {{ teacher.surname }} {{ teacher.name }}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <button class="submit-btn" name="new-subject" disabled>Submit</button>
+
+                    </div>
+                </form>
+                {% if subjects|length==0 %}
+                    <div class="no-result">No information</div>
+                {% else %}
+                    <table class="table-list" id="table-subjects">
+                        <tbody>
+
+                        {% for subject in subjects %}
+                            <tr class="table-data {% if subject.exam %}exam{% endif %}" id="subject-{{ subject.id }}"
+                                onclick="showAdditionalInfo(this)">
+                                <th>
+                                    {{ subject.name }}
+                                </th>
+                            </tr>
+                            <tr class="table-data-full" id="subject-{{ subject.id }}-additional">
+                                <td>
+                                    <div>Short name: {{ subject.short_name }}</div>
+                                    <div>Exam: {{ 'yes' if subject.exam else 'no' }}</div>
+                                    <div class="clickable" onclick="showTeacher({{ subject.teacher }})">
+                                        Teacher: {{ subject.getTeacher().name }} {{ subject.getTeacher().surname }}
+                                    </div>
+                                    <div class="options-div">
+                                        <button class="options-btn collapsible-btn btn-edit" name="edit-subject"
+                                                value="{{ subject.id }}"
+                                                data-placeholder="confirm-edit-subject-{{ subject.id }}"></button>
+
+                                        <button class="options-btn collapsible-btn btn-remove"
+                                                data-placeholder="confirm-remove-subject-{{ subject.id }}"></button>
+
+                                    </div>
+                                    <form method="post" enctype="multipart/form-data" class="collapsible-container"
+                                          id="confirm-remove-subject-{{ subject.id }}">
+                                        <div class="confirm-action-title">
+                                            Remove note?
+                                        </div>
+                                        <div class="confirm-action-btn-div">
+                                            <button type="button" class="confirm-action-btn btn-cancel"
+                                                    id="edit-btn"></button>
+                                            <button type="submit" name="remove-subject"
+                                                    value="{{ subject.id }}" class="confirm-action-btn btn-confirm"></button>
+                                        </div>
+                                    </form>
+
+                                    <form method="post" enctype="multipart/form-data" class="collapsible-container"
+                                          id="confirm-edit-subject-{{ subject.id }}">
+                                        <div class="confirm-action-title">
+                                            Edit note?
+                                        </div>
+                                        <div class="confirm-action-content">
+
+                                            <div class="input-group">
+                                                <input type="text" name="name"
+                                                       onfocus="inputFocus(this)"
+                                                       onblur="inputBlur(this)" value="{{ subject.name }}">
+                                                <span data-placeholder="Name"></span>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" name="short"
+                                                       onfocus="inputFocus(this)"
+                                                       onblur="inputBlur(this)" value="{{ subject.short_name }}">
+                                                <span data-placeholder="Abbreviation"></span>
+                                            </div>
+
+                                            <div class="input-group">
+
+                                                <select name="exam">
+                                                    <option value="1" {% if subject.exam %}selected{% endif %}>Yes
+                                                    </option>
+                                                    <option value="0" {% if not subject.exam %}selected{% endif %}>No
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <input type="text" id="edit-subject-teacher-{{ subject.id }}"
+                                                       name="teacher"
+                                                       onfocus="inputFocus(this)"
+                                                       onblur="inputBlur(this)"
+                                                       onkeyup="findOptionInput(this)"
+                                                       value="{{ subject.getTeacher().surname }} {{ subject.getTeacher().name }}">
+                                                <span data-placeholder="Teacher"></span>
+                                            </div>
+                                            <input name="edit-subject-teacher-id"
+                                                   id="edit-subject-teacher-{{ subject.id }}-hidden"
+                                                   value="{{ subject.teacher }}"
+                                                   hidden>
+
+                                            <div class="option-list">
+                                                {% for teacher in teachers %}
+                                                    <div id="edit-subject-teacher-{{ subject.id }}-select-{{ teacher.id }}"
+                                                         class="option-list-option"
+                                                         onclick="fillNewInput(this)">
+                                                        {{ teacher.surname }} {{ teacher.name }}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                        <div class="confirm-action-btn-div">
+                                            <button type="button" class="confirm-action-btn btn-cancel"></button>
+                                            <button type="submit" name="edit-subject"
+                                                    value="{{ subject.id }}"
+                                                    class="confirm-action-btn btn-confirm"></button>
+                                        </div>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <div class="subsection-header">
+
+                <div class="subsection-header-text">
+                    All teachers
+                </div>
+            </div>
+            <div class="section-content">
+                <form method="post" enctype="multipart/form-data" class="new-item-menu" id="new-item-menu-teacher">
+                    <div class="new-item-toogler" onclick="showIt('new-item-menu-teacher')">
+                        <div class="new-item-icon icon-dark"></div>
+                        Add new teacher
+                    </div>
+                    <div class="new-item-content" id="new-item-teacher">
+                        <div class="input-group">
+                            <input type="text" name="name" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Name"></span>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="surname" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Surname"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <select name="title">
+                                <option value="" selected>No title</option>
+                                {% for title in TITLES %}
+                                    <option>{{ title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="email" name="email" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Email"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="faculty_info" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Faculty page"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="webpage" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Webpage"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="consultations" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Consultations"></span>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" name="room" onfocus="inputFocus(this)" onblur="inputBlur(this)">
+                            <span data-placeholder="Room"></span>
+                        </div>
+
+                        <input name="new-subject-teacher-id" id="new-subject-teacher-hidden" hidden>
+
+
+                        <button class="submit-btn" name="new-teacher">Submit</button>
+
+                    </div>
+                </form>
+
+
+                <div class="search-div">
+
+                    <div class="search-field">
+
+                        <select id="search-category" onchange="changePlaceholder(this)">
+                            <option value="name">Name</option>
+                            <option value="surname" selected>Surname</option>
+                            <option value="title">Title</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+                    <div class="search-field">
+                        <input type="text" id="search-field" onfocus="inputFocus(this)" onblur="inputBlur(this)"
+                               onkeyup="filter_list(this)">
+                        <span id="search-field-placeholder" data-placeholder="Surname"></span>
+                    </div>
+
+                </div>
+
+                <table class="table-list" id="table-teachers" style="display: none">
+                    <thead>
+                    <tr>
+                        <th class="teacher-title-div">Title</th>
+                        <th class="teacher-name teacher-surname">Name</th>
+                        <th class="teacher-email">Email</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    {% for teacher in teachers %}
+                        <tr class="teacher-data" id="teacher-{{ teacher.id }}" onclick="showAdditionalInfo(this)">
+
+                            <th id="teacher-title-{{ teacher.id }}" class="teacher-title-div">
+                                <a class="teacher-title">{{ teacher.title }}</a>
+                            </th>
+                            <th id="teacher-surname-{{ teacher.id }}">
+                                <a class="teacher-surname">{{ teacher.surname }}</a> <a
+                                    class="teacher-name"> {{ teacher.name }}</a>
+                            </th>
+
+                            <th id="teacher-email-{{ teacher.id }}">
+                                <a class="teacher-email">{{ teacher.getEmail() }}</a>
+                            </th>
+
+
+                        </tr>
+                        <tr class="table-data-full" id="teacher-{{ teacher.id }}-additional">
+                            <td colspan="4">
+                                <div>Name: {{ teacher.name }} {{ teacher.surname }}</div>
+                                <div>Email: {% if teacher.email %}
+                                    <a href="mailto:{{ teacher.getEmail() }}">{{ teacher.getEmail() }}</a>{% else %}
+                                    no email {% endif %}
+                                </div>
+                                <div>Faculty page: <a href="{{ teacher.faculty_info }}" target="_blank">More info</a>
+                                </div>
+                                <div>Webpage: {% if teacher.webpage %}
+                                    <a href="{{ teacher.webpage }}" target="_blank">Link</a>{% else %}No
+                                    webpage{% endif %}
+                                </div>
+                                <form method="post" enctype="multipart/form-data" class="options-div">
+                                    <button class="options-btn btn-edit" name="edit-teacher"
+                                            value="{{ teacher.id }}"></button>
+                                    <button type="submit" class="options-btn btn-remove" name="remove-teacher"
+                                            value="{{ teacher.id }}"></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="no-result" id="no-result">No result</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="help-nav show" id="help-nav">
+        <a href="javascript:void(0)" onclick="scrollToSection('schedule-section')">
+            <div class="help-nav-item" id="schedule">
+                <div class="help-nav-item-ico">
+                    <img class="help-nav-item-ico-img" src="{{ url_for('static', filename='calendar.png') }}">
+                </div>
+                <div class="help-nav-item-text">
+                    Schedule
+                </div>
+            </div>
+        </a>
+        <a href="javascript:void(0)" onclick="scrollToSection('tests-section')">
+            <div class="help-nav-item" id="tests">
+                <div class="help-nav-item-ico">
+                    <img class="help-nav-item-ico-img" src="{{ url_for('static', filename='exams.png') }}">
+                </div>
+                <div class="help-nav-item-text">
+                    Tests / Exams
+                </div>
+            </div>
+        </a>
+        <a href="javascript:void(0)" onclick="scrollToSection('teachers-section')">
+            <div class="help-nav-item" id="teachers">
+                <div class="help-nav-item-ico">
+                    <img class="help-nav-item-ico-img" src="{{ url_for('static', filename='teacher.png') }}">
+                </div>
+                <div class="help-nav-item-text">
+                    Teachers
+                </div>
+            </div>
+        </a>
+    </div>
+
+{% endblock %}
