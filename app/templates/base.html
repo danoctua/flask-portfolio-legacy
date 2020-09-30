@@ -33,9 +33,9 @@
         }
     </style>
 
-    <script src="{{ url_for('static', filename='actions.js') }}?v={{ version }}"
+    <script src="{{ url_for('static', filename='actions.js') }}?v={{ media_version }}"
             type="application/javascript"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ version }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ media_version }}" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
 
     {% block script_include %}

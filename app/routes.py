@@ -1,4 +1,4 @@
-from app import app
+from app import app, media_version
 from flask import render_template, flash, redirect, url_for, request, abort, g, make_response, jsonify
 from werkzeug.urls import url_parse
 from app.forms import *
@@ -14,6 +14,7 @@ import requests, json
 import hashlib
 import hmac
 import base64
+
 # import telegram
 
 #
@@ -85,6 +86,7 @@ import base64
 
 pages = {'/': 'About me', 'studies': 'Studies', 'projects': 'Projects', 'contact': 'Contact'}
 
+
 # FIXME: replace by login required
 # @app.before_request
 # def before_request_callback():
@@ -93,7 +95,7 @@ pages = {'/': 'About me', 'studies': 'Studies', 'projects': 'Projects', 'contact
 
 @app.context_processor
 def inject_vars():
-    return dict(PAGES=pages)
+    return dict(PAGES=pages, media_version=media_version)
 
 
 @app.route('/')
@@ -125,16 +127,24 @@ def studies_page():
     #         elif 'remove-teacher' in req.keys():
     #             removeTeacher(req['remove-teacher'], app_session=session)
     # notification = checkNotification(session)
-    TITLES = ['mgr', 'inż.', 'prof. zw. dr hab. inż.', 'dr inż.', 'dr hab. inż.', 'mgr inż.', 'dr', 'prof. dr hab.', 'prof. dr hab. inż.']
-    FACULTIES = ['FC','FA', 'FCEE', 'FMEM', 'FET', 'FET', 'FTP', 'FTE', 'FEM', 'FCT', 'CJiK']
+    TITLES = ['mgr', 'inż.', 'prof. zw. dr hab. inż.', 'dr inż.', 'dr hab. inż.', 'mgr inż.', 'dr', 'prof. dr hab.',
+              'prof. dr hab. inż.']
+    FACULTIES = ['FC', 'FA', 'FCEE', 'FMEM', 'FET', 'FET', 'FTP', 'FTE', 'FEM', 'FCT', 'CJiK']
     teachers = []
     subjects = []
-    return render_template('studies.html', current_function='studies', current='studies', teachers=teachers, subjects=subjects, TITLES=TITLES, FACULTIES=FACULTIES)
+    return render_template('studies.html', current_function='studies', current='studies', teachers=teachers,
+                           subjects=subjects, TITLES=TITLES, FACULTIES=FACULTIES)
 
 
 @app.route('/projects')
 def projects_page():
     return render_template('projects.html', current_function='projects')
+
+
+@app.route('/projects/<category>/add')
+@login_required
+def add_project_page(category):
+    return render_template("project/add.html")
 
 
 @app.route('/projects/<int:project_id>')

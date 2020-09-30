@@ -24,6 +24,11 @@
     <div class="tab-pan" id="tab-pan-private">
         <div class="project-items-container">
             <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("add_project_page", category="private") }}">
+                    <div class="project-item-bg-image project-item-bg-new"></div>
+                </a>
+            </div>
+            <div class="project-item-wrapper">
                 <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
                     <div class="project-item-bg-image"></div>
                     <div class="project-item-header">
@@ -80,9 +85,12 @@
         </div>
     </div>
     <div class="tab-pan" id="tab-pan-work">
-        <button class="btn-block">Add new</button>
-
         <div class="project-items-container">
+            <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("add_project_page", category="work") }}">
+                    <div class="project-item-bg-image project-item-bg-new"></div>
+                </a>
+            </div>
             <div class="project-item-wrapper">
                 <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
                     <div class="project-item-bg-image"></div>
@@ -99,7 +107,11 @@
         </div>
     </div>
     <div class="tab-pan" id="tab-pan-study">
-
+        <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("add_project_page", category="study") }}">
+                    <div class="project-item-bg-image project-item-bg-new"></div>
+                </a>
+            </div>
     </div>
 
 

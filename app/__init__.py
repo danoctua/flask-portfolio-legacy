@@ -21,6 +21,8 @@ dotenv_path = os.path.join(os.path.dirname(__file__), os.pardir, '.flaskenv')
 load_dotenv(dotenv_path)
 
 
+media_version = "1.0.1"
+
 
 app = Flask(__name__)
 app.config.from_object(Config)

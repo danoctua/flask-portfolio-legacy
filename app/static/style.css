@@ -1049,6 +1049,25 @@ select, input {
   flex: 1;
 }
 
+.project-item-bg-new {
+  position: relative;
+}
+
+.project-item-bg-new:after {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("new.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 20px;
+  box-sizing: border-box;
+  background-origin: content-box;
+  background-position: center;
+  filter: invert(1) opacity(0.5);
+}
+
 .project-item-header {
   background-color: var(--secondary-bg-color);
   color: var(--primary-text-color);
