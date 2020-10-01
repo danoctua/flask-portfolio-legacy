@@ -1231,6 +1231,7 @@ input.btn-block {
 
 .tab-pan.show {
   display: flex;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 901px) {
