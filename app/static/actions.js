@@ -316,9 +316,16 @@ window.onscroll = function () {
     let container_up_arrow = document.getElementById('container_up_arrow');
     let notification_bar = document.getElementById('notification-div');
     let header_div = document.getElementById('header');
+    let header_bg = document.getElementById('header-bg');
     let position = container_div.getBoundingClientRect().top;
     let currentPos = document.documentElement.scrollTop;
     var st = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (winWidth > 990) {
+        header_bg.style.transform = 'translateY(' + currentPos / winHeight * 100 + '%)';
+    } else {
+        header_bg.style.transform = 'translateY(' + currentPos / winHeight * 30 + '%)';
+    }
 
     function animateScrolling(container, header, forward, container_position, page_position) {
         if (container_position > 0) {
