@@ -322,9 +322,9 @@ window.onscroll = function () {
     var st = window.pageYOffset || document.documentElement.scrollTop;
 
     if (winWidth > 990) {
-        header_bg.style.transform = 'translateY(' + currentPos / winHeight * 100 + '%)';
+        header_bg.style.transform = 'translateY(' + Math.max(currentPos / winHeight, 0) * 100 + '%)';
     } else {
-        header_bg.style.transform = 'translateY(' + currentPos / winHeight * 30 + '%)';
+        header_bg.style.transform = 'translateY(' + Math.max(currentPos / winHeight * 30, 0) + '%)';
     }
 
     function animateScrolling(container, header, forward, container_position, page_position) {
