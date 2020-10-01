@@ -160,7 +160,7 @@ a {
 .header-text {
   color: var(--primary-text-color);
   overflow: hidden;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   animation: appear-slide .5s;
   white-space: nowrap;
   transform: translateY(-50%);
@@ -271,11 +271,9 @@ body {
   z-index: 2;
   position: relative;
   float: left;
-  font-weight: 300;
+  font-weight: 600;
   top: 50%;
-
-  /*transition: 0s!important;*/
-  font-family: Montserrat, "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 40px;
 }
 
@@ -1291,9 +1289,7 @@ input.btn-block {
 }
 
 .project-item:hover {
-  transform: translateY(-30px);
-
-
+  transform: translateY(-20px);
 }
 
 
@@ -1309,6 +1305,13 @@ input.btn-block {
   padding: .5em;
   cursor: pointer;
   font-size: 1.1em;
+  font-weight: 600;
+  opacity: .7;
+  transition: .2s;
+}
+
+.tab-link:hover, .tab-link.active {
+  opacity: 1;
 }
 
 .tab-link:after, .tab-link:after {
@@ -1318,7 +1321,7 @@ input.btn-block {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: grey;
+  background-color: var(--primary-text-color);
   transform: rotateY(90deg);
   transition: .2s;
 }
