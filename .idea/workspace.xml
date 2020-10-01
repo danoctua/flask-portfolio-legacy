@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf180694-936b-49df-8208-e1a182213067" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/static/image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/5e18cea7343a_project_bg_url.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/9150d53f56ef_project_category.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/versions/96d7d9cdea24_project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/project/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/project/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/projects.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +107,7 @@
       <updated>1601284361191</updated>
       <workItem from="1601284365497" duration="35021000" />
       <workItem from="1601465013528" duration="866000" />
-      <workItem from="1601465936318" duration="17029000" />
+      <workItem from="1601465936318" duration="19623000" />
     </task>
     <task id="LOCAL-00001" summary="requirements.txt">
       <created>1601470415452</created>
@@ -145,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601477202488</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add projects">
+      <created>1601584789722</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601584789722</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +147,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="requirements.txt" />
     <MESSAGE value="styles update" />
-    <option name="LAST_COMMIT_MESSAGE" value="styles update" />
+    <MESSAGE value="add projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="add projects" />
   </component>
   <component name="WindowStateProjectService">
     <state x="680" y="378" width="615" height="357" key="#Notifications" timestamp="1601465479145">
@@ -170,11 +163,11 @@
       <screen x="66" y="27" width="1854" height="1053" />
     </state>
     <state x="726" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/66.27.1854.1053@66.27.1854.1053" timestamp="1601289360010" />
-    <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2" timestamp="1601477202346">
-      <screen x="66" y="27" width="1854" height="1053" />
+    <state x="558" y="120" width="1304" height="874" key="CommitChangelistDialog2" timestamp="1601584789517">
+      <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2/66.27.1854.1053@66.27.1854.1053" timestamp="1601477202346" />
-    <state x="558" y="120" width="860" height="874" key="CommitChangelistDialog2/66.27.3220.1053@66.27.3220.1053" timestamp="1601470686391" />
+    <state x="558" y="120" width="860" height="874" key="CommitChangelistDialog2/66.27.3220.1053@66.27.3220.1053" timestamp="1601584789517" />
     <state x="166" y="127" width="1654" height="853" key="DiffContextDialog" timestamp="1601465880255">
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
@@ -192,11 +185,11 @@
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="482" y="188" width="1022" height="737" key="SettingsEditor/66.27.3220.1053@66.27.3220.1053" timestamp="1601465878477" />
-    <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601477205867">
-      <screen x="66" y="27" width="1854" height="1053" />
+    <state x="588" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601584790725">
+      <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2/66.27.1854.1053@66.27.1854.1053" timestamp="1601477205867" />
-    <state x="588" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/66.27.3220.1053@66.27.3220.1053" timestamp="1601470687649" />
+    <state x="588" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/66.27.3220.1053@66.27.3220.1053" timestamp="1601584790725" />
     <state x="350" y="154" width="857" height="806" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601555688987">
       <screen x="66" y="27" width="1854" height="1053" />
     </state>
@@ -206,11 +199,11 @@
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="774" y="468" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/66.27.3220.1053@66.27.3220.1053" timestamp="1601465067091" />
-    <state x="515" y="279" width="1317" height="644" key="find.popup" timestamp="1601579272773">
+    <state x="515" y="279" width="1317" height="644" key="find.popup" timestamp="1601585310014">
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="614" y="231" width="758" height="644" key="find.popup/66.27.1854.1053@66.27.1854.1053" timestamp="1601311311904" />
-    <state x="515" y="279" width="1317" height="644" key="find.popup/66.27.3220.1053@66.27.3220.1053" timestamp="1601579272773" />
+    <state x="515" y="279" width="1317" height="644" key="find.popup/66.27.3220.1053@66.27.3220.1053" timestamp="1601585310014" />
     <state x="166" y="127" width="1654" height="853" key="git4idea.log.GitShowExternalLogAction" timestamp="1601465004419">
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
