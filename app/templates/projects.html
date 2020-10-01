@@ -28,59 +28,22 @@
                     <div class="project-item-bg-image project-item-bg-new"></div>
                 </a>
             </div>
-            <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
-                    <div class="project-item-bg-image"></div>
-                    <div class="project-item-header">
-                        <div class="project-item-name">
-                            e-Board
+            {% for project in projects_private %}
+                <div class="project-item-wrapper">
+                    <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
+                       href="{{ url_for("project_page", project_id=project.project_id) }}">
+                        <div class="project-item-bg-image"></div>
+                        <div class="project-item-header">
+                            <div class="project-item-name">
+                                {{ project.title }}
+                            </div>
+                            <div class="project-item-updated">
+                                {{ moment(project.created_time).fromNow() }}
+                            </div>
                         </div>
-                        <div class="project-item-updated">
-                            2 days ago
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
-                    <div class="project-item-bg-image"></div>
-                    <div class="project-item-header">
-                        <div class="project-item-name project-private">
-                            e-Board
-                        </div>
-                        <div class="project-item-updated">
-                            2 days ago
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="project-item-wrapper">
-                <a class="project-item" href="#">
-                    <div class="project-item-bg-image"></div>
-                    <div class="project-item-header">
-                        <div class="project-item-name">
-                            e-Board
-                        </div>
-                        <div class="project-item-updated">
-                            2 days ago
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="project-item-wrapper">
-                <a class="project-item" href="#">
-                    <div class="project-item-bg-image"></div>
-                    <div class="project-item-header">
-                        <div class="project-item-name">
-                            e-Board
-                        </div>
-                        <div class="project-item-updated">
-                            2 days ago
-                        </div>
-                    </div>
-                </a>
-            </div>
-
+                    </a>
+                </div>
+            {% endfor %}
 
         </div>
     </div>
@@ -91,27 +54,49 @@
                     <div class="project-item-bg-image project-item-bg-new"></div>
                 </a>
             </div>
-            <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("project_page", project_id=1) }}">
-                    <div class="project-item-bg-image"></div>
-                    <div class="project-item-header">
-                        <div class="project-item-name">
-                            e-Board
+            {% for project in projects_work %}
+                <div class="project-item-wrapper">
+                    <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
+                       href="{{ url_for("project_page", project_id=project.project_id) }}">
+                        <div class="project-item-bg-image"></div>
+                        <div class="project-item-header">
+                            <div class="project-item-name">
+                                {{ project.title }}
+                            </div>
+                            <div class="project-item-updated">
+                                {{ moment(project.created_time).fromNow() }}
+                            </div>
                         </div>
-                        <div class="project-item-updated">
-                            2 days ago
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            {% endfor %}
+
         </div>
     </div>
     <div class="tab-pan" id="tab-pan-study">
         <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("add_project_page", category="study") }}">
-                    <div class="project-item-bg-image project-item-bg-new"></div>
+            <a class="project-item" href="{{ url_for("add_project_page", category="study") }}">
+                <div class="project-item-bg-image project-item-bg-new"></div>
+            </a>
+        </div>
+
+        {% for project in projects_study %}
+            <div class="project-item-wrapper">
+                <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
+                   href="{{ url_for("project_page", project_id=project.project_id) }}">
+                    <div class="project-item-bg-image"></div>
+                    <div class="project-item-header">
+                        <div class="project-item-name">
+                            {{ project.title }}
+                        </div>
+                        <div class="project-item-updated">
+                            {{ moment(project.created_time).fromNow() }}
+                        </div>
+                    </div>
                 </a>
             </div>
+        {% endfor %}
+
     </div>
 
 

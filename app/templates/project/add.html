@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Add project{% endblock %}
+
+{% block header_bg %}url({{ url_for('static', filename='project.jpg') }}){% endblock %}
+
+{% block header_text %}Add new {{ category }} project{% endblock %}
+
+{% block content %}
+
+    <form action="" class="form-group" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        {{ form.title(size=100, placeholder="Title") }}
+        {% for error in form.title.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-image"></span>
+        {{ form.background_image(placeholder="Background URL") }}
+        </div>
+        {% for error in form.background_image.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.description(placeholder="Describe your project") }}
+        {% for error in form.description.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.submit() }}
+    </form>
+
+{% endblock %}

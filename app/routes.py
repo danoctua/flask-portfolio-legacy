@@ -138,18 +138,35 @@ def studies_page():
 
 @app.route('/projects')
 def projects_page():
-    return render_template('projects.html', current_function='projects')
+    projects_private = Project.query.filter(Project.category == "private").order_by(db.desc(Project.created_time)).all()
+    projects_work = Project.query.filter(Project.category == "work").order_by(db.desc(Project.created_time)).all()
+    projects_study = Project.query.filter(Project.category == "study").order_by(db.desc(Project.created_time)).all()
+    return render_template('projects.html', projects_private=projects_private, projects_work=projects_work, projects_study=projects_study)
 
 
-@app.route('/projects/<category>/add')
-@login_required
+@app.route('/projects/<category>/add', methods=["GET", "POST"])
+# @login_required
 def add_project_page(category):
-    return render_template("project/add.html")
+    form = NewProjectForm()
+    # flash("Some message, longer then you might expect", "success")
+    if form.validate_on_submit():
+        success, message = add_project(
+            category=category,
+            form=form
+        )
+        if success:
+            flash(message, "success")
+            return redirect(url_for("projects_page"))
+        else:
+            flash(message, "danger")
+            return redirect(url_for("add_project_page", category=category))
+    return render_template("project/add.html", category=category, form=form)
 
 
 @app.route('/projects/<int:project_id>')
 def project_page(project_id):
-    return render_template('project/index.html')
+    project = Project.query.filter(Project.project_id == project_id).first_or_404()
+    return render_template('project/index.html', project=project)
 
 
 @app.route('/contact')

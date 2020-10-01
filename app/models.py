@@ -10,6 +10,7 @@ from app import app
 from flask_login import UserMixin
 from time import time
 import jwt
+from app.forms import NewProjectForm
 from flask_babel import _, get_locale, force_locale
 from flask import url_for
 
@@ -138,3 +139,38 @@ class UserPrivacy(db.Model):
     use_gravatar = db.Column("use_gravatar", db.Boolean, default=True)
     share_number = db.Column("share_number", db.Boolean, default=True)
     share_email = db.Column("share_email", db.Boolean, default=True)
+
+
+class Project(db.Model):
+    __tablename__ = "project"
+
+    project_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    category = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    background_url = db.Column(db.String(200), default=True)
+    description = db.Column(db.Text(5000), nullable=True)
+    created_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def __init__(self, category, title, background_url, description):
+        self.category = category
+        self.title = title
+        self.background_url = background_url
+        self.description = description
+
+    def get_bg_image(self):
+        return self.background_url or url_for('static', filename='project.jpg')
+
+
+def add_project(category, form):
+    with session_handler() as db_session:
+        if not isinstance(form, NewProjectForm):
+            return False, "Backend form error"
+        new_project = Project(
+            category=category,
+            title=form.title.data,
+            background_url=form.background_image.data,
+            description=form.description.data
+        )
+        db_session.add(new_project)
+        db_session.commit()
+        return True, "New project has been created"

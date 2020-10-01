@@ -78,41 +78,37 @@ window.onload = function () {
     //     closeNav();
     // }, false);
 
-    let notification_div = document.getElementById('notification-div');
-    if (notification_div) {
-        let notification_content = document.getElementById('notification-content');
-        let notification_timer = document.getElementById('notification-timer');
-        let notification_status = document.getElementById('notification-status');
+    function showNotification(wrapper) {
+        let notification_content = wrapper.getElementsByClassName('notification-content');
+        if (notification_content && notification_content.length > 0) {
+            notification_content = notification_content[0]
+        }
+        let notification_timer = document.getElementsByClassName('notification-timer');
+        if (notification_timer && notification_timer.length > 0) {
+            notification_timer = notification_timer[0]
+        }
         let frame_length = Math.max(notification_content.innerText.length / 10, 7) * 10;
+        wrapper.classList.add("show");
 
-        function showNotification() {
-            var width = 100;
-            var id = setInterval(frame, frame_length);
+        let width = 100;
+        let current_state = setInterval(frame, frame_length);
 
-            function frame() {
-                if (width <= 0) {
-                    hideNotification();
-                    clearInterval(id);
-                } else {
-                    width--;
-                    notification_timer.style.width = width + '%';
-                }
-            }
-        }
-
-        if (notification_content.innerText.replace(/\s/g, '') !== "") {
-            let status = notification_status.innerText.replace(/\s/g, '');
-            let ls_available = ['success', 'danger', 'warning'];
-            if (ls_available.includes(status)) {
-                status = 'notification-' + status
+        function frame() {
+            if (width <= 0) {
+                hideNotification(wrapper);
+                clearInterval(current_state);
             } else {
-                status = 'notification-warning'
+                width--;
+                notification_timer.style.width = width + '%';
             }
-            notification_div.classList.add(status);
-            notification_div.style.display = 'block';
-            showNotification();
         }
 
+
+    }
+
+    let notification_wrappers = document.getElementsByClassName('notification-wrapper');
+    for (let i = 0; i < notification_wrappers.length; i++) {
+        showNotification(notification_wrappers[i])
     }
 
 
@@ -291,8 +287,6 @@ function closeTab(target) {
     let child = document.getElementById(target.dataset.target);
     if (child) {
         child.classList.remove("show");
-        child.style.display = "none";
-
     }
 }
 
@@ -300,7 +294,6 @@ function showTab(target) {
     let target_child = document.getElementById(target.dataset.target);
     if (target_child) {
         target.classList.add("active");
-        target_child.style.display = "block";
         target_child.classList.add("show");
     }
 }
@@ -441,10 +434,10 @@ function resizeTop() {
     let winWidth = window.innerWidth;
     if (winWidth <= 900) {
         document.getElementById('header').style.height = winHeight.toString() + 'px';
-        document.getElementById('header-text').style.lineHeight = (winHeight - 30).toString() + 'px';
+        // document.getElementById('header-text').style.lineHeight = (winHeight - 30).toString() + 'px';
     } else {
         document.getElementById('header').style.height = (winHeight * 0.7).toString() + 'px';
-        document.getElementById('header-text').style.lineHeight = (winHeight * 0.7).toString() + 'px';
+        // document.getElementById('header-text').style.lineHeight = (winHeight * 0.7).toString() + 'px';
     }
 }
 
@@ -672,12 +665,12 @@ function hideCloseNav(elem) {
     }
 }
 
-function hideNotification() {
-    let notification_div = document.getElementById('notification-div');
-    notification_div.style.transform = 'rotateX(90deg)';
+function hideNotification(wrapper) {
+    wrapper.classList.remove("show");
+    wrapper.classList.add("hide");
     setTimeout(function () {
-        notification_div.classList.remove('show');
-    }, 300);
+        wrapper.parentNode.removeChild(wrapper)
+    }, 1000);
 }
 
 function showTeacher(id) {

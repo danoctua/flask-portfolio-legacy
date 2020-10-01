@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}" sizes="16x16">
-{#    <link rel="manifest" href="/manifest.json">#}
+    {#    <link rel="manifest" href="/manifest.json">#}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -42,10 +42,10 @@
     {% endblock %}
 
     <title>{% block title %}{% endblock %}</title>
-    <style>
 
-
-    </style>
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
 
 </head>
 
@@ -106,32 +106,38 @@
             </div>
         {% endif %}
 
-{#        <div class="splitter-space"></div>#}
-{#        <div class="theme-switch-wrapper">#}
-{#            <label class="theme-switch" for="checkbox">#}
-{#                <input type="checkbox" id="checkbox"/>#}
-{#                <div class="slider round"></div>#}
-{#            </label>#}
-{#            <em>Dark Mode</em>#}
-{#        </div>#}
+        {#        <div class="splitter-space"></div>#}
+        {#        <div class="theme-switch-wrapper">#}
+        {#            <label class="theme-switch" for="checkbox">#}
+        {#                <input type="checkbox" id="checkbox"/>#}
+        {#                <div class="slider round"></div>#}
+        {#            </label>#}
+        {#            <em>Dark Mode</em>#}
+        {#        </div>#}
 
         <div class="navbar-copyright">© 2020 DanikTL</div>
     </div>
 </div>
-{% if notification %}
 
-    <div class="notification-div the-blur" id="notification-div">
-        <div class="notification-status" id="notification-status">{% block notification_status %}
-            {{ notification[0] }}{% endblock %}</div>
-        <div class="notification-close" onclick="hideNotification()"></div>
-        <div class="notification-content" id="notification-content">
-            {% block notification %}{{ notification[1] }}{% endblock %}
-        </div>
-        <div class="notification-timer" id="notification-timer">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="notification-wrapper">
+                <div class="notification-div notification-{{ category }}" id="notification-div">
+                    <div class="notification-close" onclick="hideNotification(this.parentNode.parentElement)">
+                        <div></div>
+                    </div>
+                    <div class="notification-content">
+                        {{ message }}
+                    </div>
+                    <div class="notification-timer">
 
-        </div>
-    </div>
-{% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 <div class="nav-icon" id="nav-toogler" onclick="hideCloseNav(this)">
     <div></div>
