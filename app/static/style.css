@@ -1275,12 +1275,18 @@ input.btn-block {
   background-image: url("back.png");
 }
 
-.topic-body h1 {
+.topic-body h1, .topic-body h2 {
   line-height: 1.3;
+  margin: 0.5em 0;
+}
+.topic-body h1, .topic-body h2, .topic-body ol, .topic-body ul {
+  display: inline-block;
+}
+.topic-body ol, .topic-body ul {
   margin: 0;
 }
-.topic-body h2, .topic-body ol, .topic-body ul {
-  margin: 0;
+.topic-body ol li + br + li, .topic-body ul li + br + li {
+  margin-top: -1em;
 }
 
 @media (min-width: 901px) {
