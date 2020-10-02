@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+First boot
+{% endblock %}
+
+{% block blank %}
+<div class="container-my container-alone">
+
+    <h1>Welcome, sir</h1>
+    Tell me about yourself...
+    <form action="" class="form-group" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="input-span-group">
+            <span class="icon-email"></span>
+            {{ form.email(placeholder="Email") }}
+        </div>
+        {% for error in form.email.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-user"></span>
+            {{ form.name(placeholder="First name") }}
+        </div>
+        {% for error in form.name.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span></span>
+            {{ form.surname(placeholder="Surname") }}
+        </div>
+        {% for error in form.surname.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-gender"></span>
+            {{ form.gender }}
+        </div>
+        {% for error in form.gender.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-phone"></span>
+            {{ form.phone(placeholder="Phone number") }}
+        </div>
+        {% for error in form.phone.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+    {{ form.submit() }}
+    </form>
+</div>
+{% endblock %}
+
+

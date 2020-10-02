@@ -10,7 +10,7 @@ from app import app
 from flask_login import UserMixin
 from time import time
 import jwt
-from app.forms import NewProjectForm
+from app.forms import NewProjectForm, UserForm
 from flask_babel import _, get_locale, force_locale
 from flask import url_for
 
@@ -52,22 +52,19 @@ class User(UserMixin, db.Model):
     phone = db.Column("phone", db.String(15), nullable=True)
     telegram_u_id = db.Column("telegram_u_id", db.Integer, nullable=True)
     last_seen = db.Column(db.DateTime, default=datetime.datetime(1900, 1, 1, 0, 0))
-    preferred_language = db.Column("preferred_language", db.String(4), nullable=True)
 
     privacy = db.relationship("UserPrivacy", back_populates="user", uselist=False)
     privileges = db.relationship("UserPrivileges", back_populates="user", uselist=False)
 
-    def __init__(self, email, password, name, surname, gender, phone,
-                 approved=True):
+    def __init__(self, email, name, surname, gender, phone):
         self.email = email
-        self.password = generate_password_hash(password)
         self.name = name
         self.surname = surname
         self.gender = gender
         self.phone = phone
         self.telegram_u_id = None
         self.last_seen = datetime.datetime(year=1900, month=1, day=1, hour=0, minute=0, second=0)
-        self.approved = approved
+        # self.approved = approved
 
     def validate_password(self, password):
         return check_password_hash(self.password, password)
@@ -110,16 +107,12 @@ class UserPrivileges(db.Model):
 
     def __init__(self, user_id):
         self.user_id = user_id
-        self.is_super_admin = False
         self.is_admin = False
-        self.is_elder = False
-        self.is_litcart = False
 
     user_id = db.Column("user_id", db.Integer, db.ForeignKey("user.user_id",
                                                              ondelete="CASCADE", onupdate="CASCADE"), primary_key=True,
                         nullable=False)
     user = db.relationship("User", back_populates="privileges")
-    is_super_admin = db.Column("is_super_admin", db.Boolean, default=False)
     is_admin = db.Column("is_admin", db.Boolean, default=False)
 
 
@@ -129,8 +122,8 @@ class UserPrivacy(db.Model):
     def __init__(self, user_id):
         self.user_id = user_id
         self.use_gravatar = False
-        self.share_number = True
-        self.share_email = True
+        self.share_number = False
+        self.share_email = False
 
     user_id = db.Column("user_id", db.Integer, db.ForeignKey("user.user_id",
                                                              ondelete="CASCADE", onupdate="CASCADE"), primary_key=True,
@@ -228,3 +221,22 @@ def remove_project(project_id):
         db_session.delete(project)
         db_session.commit()
         return True, "Project has been removed"
+
+
+def add_user(form):
+    with session_handler() as db_session:
+        if not isinstance(form, UserForm):
+            return False, "Backend error"
+        ex_user = db_session.query(User).filter(User.email == form.email.data).first()
+        if ex_user:
+            return False, f"User with email {form.email.data} already exists"
+        new_user = User(
+            email=form.email.data,
+            name=form.name.data,
+            surname=form.surname.data,
+            phone=form.phone.data,
+            gender=form.gender.data
+        )
+        db_session.add(new_user)
+        db_session.commit()
+        return True, f"User with email {form.email.data} has been created"

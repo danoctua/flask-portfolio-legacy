@@ -41,11 +41,11 @@
 }
 
 .google-ico {
-  width: 70px;
-  height: 70px;
-  background-image: var(--google-ico);
-  background-size: 100%;
-  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  background-image: url(google-ico-light.png);
+  background-size: contain;
+  margin-right: 10px;
 }
 
 .theme-switch-wrapper {
@@ -277,6 +277,12 @@ body {
   z-index: 5;
   padding-top: 10px;
   line-height: 32px;
+}
+
+.container-alone {
+  margin: 50px 0 !important;
+  max-width: 600px;
+  min-width: 0;
 }
 
 .png-btn {
@@ -630,6 +636,10 @@ button::-moz-focus-inner {
   margin-top: 70px;
   text-align: center;
   padding: 10px;
+  margin-bottom: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .notification-wrapper {
@@ -858,6 +868,7 @@ input, textarea, select {
   display: block;
   outline: none !important;
   border: none;
+  background-color: var(--primary-bg-color);
   font-size: 1em;
   transition: 0.4s;
   font-family: "Open Sans", sans-serif;
@@ -1298,6 +1309,22 @@ input.btn-block {
   background-image: url("web.png");
 }
 
+.icon-email {
+  background-image: url("email.png");
+}
+
+.icon-user {
+  background-image: url("user.png");
+}
+
+.icon-gender {
+  background-image: url("gender.png");
+}
+
+.icon-phone {
+  background-image: url("phone.png");
+}
+
 .topic-body h1, .topic-body h2 {
   line-height: 1.3;
   margin: 0.5em 0;
@@ -1459,7 +1486,6 @@ input.btn-block {
     transform: translate(-50%, 0%);
     border-radius: 10px;
     width: 500px;
-    height: 400px;
     margin-top: calc(-70%);
   }
 
@@ -1787,17 +1813,17 @@ input.btn-block {
 }
 @media only screen and (max-width: 900px) {
   .login-content-div {
-    top: 20%;
     left: 0;
+    bottom: -50%;
     width: 100%;
-    height: 80%;
+    height: fit-content;
     margin-top: 140%;
     border-radius: 15px 15px 0 0;
   }
 }
 @media only screen and (max-width: 900px) {
   .login-content-div.show {
-    margin-top: 0;
+    bottom: 0;
   }
 }
 @media only screen and (max-width: 900px) {

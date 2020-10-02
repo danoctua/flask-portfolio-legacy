@@ -23,11 +23,13 @@
 
     <div class="tab-pan" id="tab-pan-private">
         <div class="project-items-container">
-            <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("add_project_page", category="private") }}">
-                    <div class="project-item-bg-image project-item-bg-new"></div>
-                </a>
-            </div>
+            {% if current_user.is_authenticated %}
+                <div class="project-item-wrapper">
+                    <a class="project-item" href="{{ url_for("add_project_page", category="private") }}">
+                        <div class="project-item-bg-image project-item-bg-new"></div>
+                    </a>
+                </div>
+            {% endif %}
             {% for project in projects_private %}
                 <div class="project-item-wrapper">
                     <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
@@ -49,11 +51,13 @@
     </div>
     <div class="tab-pan" id="tab-pan-work">
         <div class="project-items-container">
-            <div class="project-item-wrapper">
-                <a class="project-item" href="{{ url_for("add_project_page", category="work") }}">
-                    <div class="project-item-bg-image project-item-bg-new"></div>
-                </a>
-            </div>
+            {% if current_user.is_authenticated %}
+                <div class="project-item-wrapper">
+                    <a class="project-item" href="{{ url_for("add_project_page", category="work") }}">
+                        <div class="project-item-bg-image project-item-bg-new"></div>
+                    </a>
+                </div>
+            {% endif %}
             {% for project in projects_work %}
                 <div class="project-item-wrapper">
                     <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
@@ -74,11 +78,13 @@
         </div>
     </div>
     <div class="tab-pan" id="tab-pan-study">
-        <div class="project-item-wrapper">
-            <a class="project-item" href="{{ url_for("add_project_page", category="study") }}">
-                <div class="project-item-bg-image project-item-bg-new"></div>
-            </a>
-        </div>
+        {% if current_user.is_authenticated %}
+            <div class="project-item-wrapper">
+                <a class="project-item" href="{{ url_for("add_project_page", category="study") }}">
+                    <div class="project-item-bg-image project-item-bg-new"></div>
+                </a>
+            </div>
+            {% endif %}
 
         {% for project in projects_study %}
             <div class="project-item-wrapper">

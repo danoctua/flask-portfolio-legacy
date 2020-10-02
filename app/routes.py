@@ -1,4 +1,4 @@
-from app import app, media_version
+from app import app, media_version, google_client
 from flask import render_template, flash, redirect, url_for, request, abort, g, make_response, jsonify
 from werkzeug.urls import url_parse
 from app.forms import *
@@ -84,6 +84,77 @@ import base64
 #         return False
 
 
+def get_google_provider_cfg():
+    return requests.get(app.config["GOOGLE_DISCOVERY_URL"]).json()
+
+
+@app.route("/login-google")
+def login_google_midpoint():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    google_provider_cfg = get_google_provider_cfg()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
+
+    request_uri = google_client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url.replace("http://", 'https://') + "/callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)
+
+
+@app.route("/login-google/callback")
+def callback():
+    # Get authorization code Google sent back to you
+    code = request.args.get("code")
+    google_provider_cfg = get_google_provider_cfg()
+    token_endpoint = google_provider_cfg["token_endpoint"]
+    # Prepare and send a request to get tokens! Yay tokens!
+    token_url, headers, body = google_client.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url.replace("http://", "https://", 1) if request.url.startswith(
+            "http://") else request.url,
+        redirect_url=request.base_url.replace("http://", "https://", 1) if request.base_url.startswith(
+            "http://") else request.base_url,
+        code=code
+    )
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(app.config["GOOGLE_CLIENT_ID"], app.config["GOOGLE_CLIENT_SECRET"]),
+    )
+    # Parse the tokens!
+    google_client.parse_request_body_response(json.dumps(token_response.json()))
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    uri, headers, body = google_client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=headers, data=body)
+    # You want to make sure their email is verified.
+    # The user authenticated with Google, authorized your
+    # app, and now you've verified their email through Google!
+    if userinfo_response.json().get("email_verified"):
+        # unique_id.data = userinfo_response.json()["sub"]
+        users_email = userinfo_response.json()["email"]
+        # picture = userinfo_response.json()["picture"]
+        # users_name = userinfo_response.json()["given_name"]
+    else:
+        flash(_('User email not available or not verified by Google'), "error")
+        return redirect(url_for('login'))
+    user = User.query.filter_by(email=users_email).first()
+    if user is None:
+        flash(_('Invalid email. You should log in to existing account'), "error")
+        return redirect(url_for('home'))
+    # if not user.approved:
+    #     flash(_("User has not been approved yet"), "error")
+    #     return redirect(url_for('home'))
+    login_user(user, remember=True)
+    flash(f"You has been logged in as {user.name}", "success")
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for("home")
+    return redirect(next_page)
+
+
 pages = {'/': 'About me', 'studies': 'Studies', 'projects': 'Projects', 'contact': 'Contact'}
 
 
@@ -101,6 +172,20 @@ def inject_vars():
 @app.route('/')
 def home():
     return render_template('about.html', current_function='about')
+
+
+@app.route('/init', methods=["POST", "GET"])
+def init_page():
+    form = UserForm()
+    if form.validate_on_submit():
+        success, message = add_user(form)
+        if success:
+            flash(message, "success")
+            return redirect(url_for("home"))
+        else:
+            flash(message, "danger")
+            return redirect(url_for("init_page"))
+    return render_template("init.html", form=form)
 
 
 @app.route('/studies', methods=['POST', 'GET'])
@@ -144,7 +229,7 @@ def projects_page():
 
 
 @app.route('/projects/<category>/add', methods=["GET", "POST"])
-# @login_required
+@login_required
 def add_project_page(category):
     form = NewProjectForm()
     # flash("Some message, longer then you might expect", "success")
@@ -169,6 +254,7 @@ def project_page(project_id):
 
 
 @app.route('/projects/<int:project_id>/edit', methods=["GET", "POST"])
+@login_required
 def edit_project_page(project_id):
     project = Project.query.filter(Project.project_id == project_id).first_or_404()
     form = NewProjectForm()
@@ -194,6 +280,7 @@ def edit_project_page(project_id):
 
 
 @app.route('/projects/<int:project_id>/update', methods=["POST"])
+@login_required
 def update_project_api_page(project_id):
     req = request.values.to_dict()
     result = update_project_settings(project_id=project_id, req=req)
@@ -201,6 +288,7 @@ def update_project_api_page(project_id):
 
 
 @app.route('/projects/<int:project_id>/remove', methods=["POST"])
+@login_required
 def remove_project_page(project_id):
     success, message = remove_project(project_id)
     if success:
@@ -217,24 +305,11 @@ def contact_page():
 
 
 @app.route('/logout')
-def logout_page(start=None):
-    req = request.values.to_dict()
-    # if g.is_logged_in:
-    #     if 'start' in req:
-    #         resp = make_response(redirect(url_for(req['start'])))
-    #     else:
-    #         resp = make_response(redirect(url_for('index')))
-    #     resp.set_cookie('token', '', expires=0)
-    #     session['notification'] = 'success'
-    #     session['message'] = 'You were logged out'
-    #     return resp
-    # session['notification'] = 'danger'
-    # session['message'] = 'Something went wrong'
-    if 'start' in req:
-        return redirect(url_for(req['start']))
-    else:
-        return redirect(url_for('index'))
-
+@login_required
+def logout_page():
+    logout_user()
+    flash("You has been logged out", "success")
+    return redirect(url_for('home'))
 #
 # @app.route('/vogue', methods=['GET', 'POST'])
 # def vogue():
