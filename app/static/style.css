@@ -1288,7 +1288,8 @@ input.btn-block {
     font-size: 20px;
     margin: -50px 30px;
     padding: 20px 20px 70px;
-    width: 901px;
+    min-width: 861px;
+    max-width: 901px;
     border-radius: 8px;
   }
 
@@ -1450,7 +1451,8 @@ input.btn-block {
     padding-left: 70px;
     padding-right: 70px;
   }
-
+}
+@media (min-width: 901px) and (min-width: 1170px) {
   .pinned-toolbox {
     position: fixed;
     top: 30%;
@@ -1462,11 +1464,18 @@ input.btn-block {
     z-index: 10;
     padding: 2em;
   }
-
+}
+@media (min-width: 901px) and (min-width: 1170px) and (min-width: 1080px) and (max-width: 1170px) {
+  .pinned-toolbox {
+    padding: 0;
+  }
+}
+@media (min-width: 901px) and (min-width: 1170px) {
   .pinned-toolbox:hover {
     opacity: 1;
   }
-
+}
+@media (min-width: 901px) and (min-width: 1170px) {
   .toolbox-item {
     width: 40px;
     height: 40px;
@@ -1477,7 +1486,8 @@ input.btn-block {
     transition: opacity 0.2s;
     padding: 0.5em;
   }
-
+}
+@media (min-width: 901px) and (min-width: 1170px) {
   .toolbox-item:hover {
     opacity: 1;
   }
@@ -1765,7 +1775,7 @@ input.btn-block {
     height: 50px;
   }
 }
-@media only screen and (max-width: 900px) {
+@media (max-width: 1169px) {
   .pinned-toolbox {
     display: flex;
     z-index: 10;
@@ -1773,8 +1783,7 @@ input.btn-block {
     background-color: rgba(var(--primary-bg-color), 0.7);
     backdrop-filter: blur(4px);
   }
-}
-@media only screen and (max-width: 900px) {
+
   .toolbox-item {
     height: 35px;
     width: 35px;

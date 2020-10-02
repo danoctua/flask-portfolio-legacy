@@ -1396,7 +1396,8 @@ input.btn-block {
     //font-weight: var(--font-theme-weight);
     margin: -50px 30px;
     padding: 20px 20px 70px;
-    width: 901px;
+    min-width: 861px;
+    max-width: 901px;
     //width: 1000px;
     border-radius: $basic_border_roundness;
   }
@@ -1574,35 +1575,43 @@ input.btn-block {
     padding-right: 70px;
   }
 
-  .pinned-toolbox {
-    position: fixed;
-    top: 30%;
-    left: max(calc(10% - 100px - 2em), 10px);
-    display: flex;
-    flex-direction: column;
-    opacity: .5;
-    transition: opacity .5s;
-    z-index: 10;
-    padding: 2em;
-  }
+  @media (min-width: 1170px) {
 
-  .pinned-toolbox:hover {
-    opacity: 1;
-  }
+    .pinned-toolbox {
+      position: fixed;
+      top: 30%;
+      left: max(calc(10% - 100px - 2em), 10px);
+      display: flex;
+      flex-direction: column;
+      opacity: .5;
+      transition: opacity .5s;
+      z-index: 10;
+      padding: 2em;
 
-  .toolbox-item {
-    width: 40px;
-    height: 40px;
-    display: block;
-    margin: .5em;
-    opacity: .6;
-    cursor: pointer;
-    transition: opacity .2s;
-    padding: .5em;
-  }
+      @media (min-width: 1080px) and (max-width: 1170px) {
+        padding: 0;
+      }
 
-  .toolbox-item:hover {
-    opacity: 1;
+    }
+
+    .pinned-toolbox:hover {
+      opacity: 1;
+    }
+
+    .toolbox-item {
+      width: 40px;
+      height: 40px;
+      display: block;
+      margin: .5em;
+      opacity: .6;
+      cursor: pointer;
+      transition: opacity .2s;
+      padding: .5em;
+    }
+
+    .toolbox-item:hover {
+      opacity: 1;
+    }
   }
 
 
@@ -1902,6 +1911,10 @@ input.btn-block {
     height: 50px;
   }
 
+}
+
+@media (max-width: 1169px) {
+
   .pinned-toolbox {
 
     display: flex;
@@ -1922,5 +1935,4 @@ input.btn-block {
     //transition: opacity .2s;
     //padding: .5em;
   }
-
 }
