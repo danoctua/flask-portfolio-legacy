@@ -35,17 +35,48 @@ window.onload = function () {
     // toggleSwitch.addEventListener('change', switchTheme, false);
     // hideHelp();
 
+    function updateProject(target) {
+        if (target.classList.contains("toolbox-icon")) {
+            target = target.parentElement;
+        }
+        let url = target.dataset.target;
+        if (url) {
+            fetch(
+                url, {
+                    method: "POST"
+                }
+            ).then(function (resp) {
+                resp.json().then(function (data) {
+                    if (data["success"]) {
+                        addNotification("success", data["message"])
+                        target.firstElementChild.classList.toggle("active")
+                    }
+                })
+            })
+        }
+    }
+
     let actions = ["click", "tap"];
+    let toolbox_items = document.getElementsByClassName("toolbox-item");
+    let tab_links = document.getElementsByClassName("tab-link");
+
     for (let i = 0; i < actions.length; i++) {
 
-        let tab_links = document.getElementsByClassName("tab-link");
         for (let j = 0; j < tab_links.length; j++) {
             tab_links[j].addEventListener(actions[i], function (event) {
-                switchTab(event.target)
+                switchTab(event.target);
             })
         }
         if (tab_links) {
             initialTabSwitch();
+        }
+
+        for (let j = 0; j < toolbox_items.length; j++) {
+            if (toolbox_items[j].dataset.type === "update") {
+                toolbox_items[j].addEventListener(actions[i], function (event) {
+                    updateProject(event.target);
+                })
+            }
         }
     }
 
@@ -64,7 +95,6 @@ window.onload = function () {
 
         hideLogin();
     }, false);
-
 
 
     // let textarea = document.querySelector(".resize-ta");
@@ -102,33 +132,6 @@ window.onload = function () {
     //     closeNav();
     // }, false);
 
-    function showNotification(wrapper) {
-        let notification_content = wrapper.getElementsByClassName('notification-content');
-        if (notification_content && notification_content.length > 0) {
-            notification_content = notification_content[0]
-        }
-        let notification_timer = document.getElementsByClassName('notification-timer');
-        if (notification_timer && notification_timer.length > 0) {
-            notification_timer = notification_timer[0]
-        }
-        let frame_length = Math.max(notification_content.innerText.length / 10, 7) * 6;
-        wrapper.classList.add("show");
-
-        let width = 100;
-        let current_state = setInterval(frame, frame_length);
-
-        function frame() {
-            if (width <= 0) {
-                hideNotification(wrapper);
-                clearInterval(current_state);
-            } else {
-                width--;
-                notification_timer.style.width = width + '%';
-            }
-        }
-
-
-    }
 
     let notification_wrappers = document.getElementsByClassName('notification-wrapper');
     for (let i = 0; i < notification_wrappers.length; i++) {
@@ -291,6 +294,52 @@ $('#main').on('click', function () {
     closeNav();
 })
 
+function showNotification(wrapper) {
+    hideAllNotifications();
+    let notification_content = wrapper.getElementsByClassName('notification-content');
+    if (notification_content && notification_content.length > 0) {
+        notification_content = notification_content[0]
+    }
+    let notification_timer = document.getElementsByClassName('notification-timer');
+    if (notification_timer && notification_timer.length > 0) {
+        notification_timer = notification_timer[0]
+    }
+    let frame_length = Math.max(notification_content.innerText.length / 10, 7) * 6;
+    wrapper.classList.add("show");
+
+    let width = 100;
+    let current_state = setInterval(frame, frame_length);
+
+    function frame() {
+        if (width <= 0) {
+            hideNotification(wrapper);
+            clearInterval(current_state);
+        } else {
+            width--;
+            notification_timer.style.width = width + '%';
+        }
+    }
+
+
+}
+
+function addNotification(status, message) {
+    let notification = "<div class=\"notification-wrapper\">\n" +
+        "                <div class=\"notification-div notification-" + status + "\" id=\"notification-div\">\n" +
+        "                    <div class=\"notification-content\">\n" +
+        "                        " + message + "\n" +
+        "                    </div>\n" +
+        "                    <div class=\"notification-timer\">\n" +
+        "                    </div>\n" +
+        "                </div>\n" +
+        "            </div>"
+    let template = document.createElement('template');
+    notification = notification.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = notification;
+    let notification_node = document.body.appendChild(template.content.firstChild);
+    showNotification(notification_node);
+}
+
 function switchTab(target) {
     if (target) {
         if (target.classList.contains("active")) {
@@ -347,9 +396,9 @@ window.onscroll = function () {
 
     if (header_bg && currentPos < winHeight) {
         if (winWidth > 990) {
-            header_bg.style.transform = 'translateY(' + winHeight * (Math.max(currentPos / winHeight, 0) / 4 ) + 'px)';
+            header_bg.style.transform = 'translateY(' + winHeight * (Math.max(currentPos / winHeight, 0) / 4) + 'px)';
         } else {
-            header_bg.style.transform = 'translateY(' + winHeight * (Math.max(currentPos / winHeight, 0) / 3 )+ 'px)';
+            header_bg.style.transform = 'translateY(' + winHeight * (Math.max(currentPos / winHeight, 0) / 3) + 'px)';
         }
     }
 
@@ -698,6 +747,13 @@ function hideCloseNav(elem) {
         closeNav()
     } else {
         openNav()
+    }
+}
+
+function hideAllNotifications(){
+    let notifications = document.getElementsByClassName("notification-wrapper show");
+    for (let i=0; i < notifications.length; i++){
+        hideNotification(notifications[i])
     }
 }
 

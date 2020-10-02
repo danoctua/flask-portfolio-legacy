@@ -6,7 +6,8 @@
 
 {#{% block header_text %}Modify project{% endblock %}#}
 
-{% block no_header %} <div class="fake-header"></div> {% endblock %}
+{% block no_header %}
+    <div class="fake-header"></div> {% endblock %}
 
 {% block content %}
 
@@ -27,9 +28,25 @@
 
         <div class="input-span-group">
             <span class="icon-image"></span>
-        {{ form.background_image(placeholder="Background URL") }}
+            {{ form.background_image(placeholder="Background URL") }}
         </div>
         {% for error in form.background_image.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-github"></span>
+            {{ form.github_url(placeholder="Github repo url") }}
+        </div>
+        {% for error in form.github_url.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-web"></span>
+            {{ form.website_url(placeholder="Website") }}
+        </div>
+        {% for error in form.website_url.errors %}
             <span class="form-error">{{ error }}</span>
         {% endfor %}
 
@@ -41,6 +58,8 @@
         {{ form.submit() }}
     </form>
 
-{#    <form action="{{ url_for("remove") }}"></form>#}
+        <form method="post" action="{{ url_for("remove_project_page", project_id=project.project_id) }}">
+            <input type="submit" class="btn-danger" value="Remove project">
+        </form>
 
 {% endblock %}

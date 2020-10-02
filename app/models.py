@@ -148,15 +148,19 @@ class Project(db.Model):
     category = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     background_url = db.Column(db.String(200), default=True)
+    github_url = db.Column(db.String(200), nullable=True)
+    website_url = db.Column(db.String(200), nullable=True)
     description = db.Column(db.Text(5000), nullable=True)
     created_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     starred = db.Column(db.Boolean, default=False)
     private = db.Column(db.Boolean, default=False)
 
-    def __init__(self, category, title, background_url, description):
+    def __init__(self, category, title, background_url, github_url, website_url, description):
         self.category = category
         self.title = title
         self.background_url = background_url
+        self.github_url = github_url
+        self.website_url = website_url
         self.description = description
 
     def get_bg_image(self):
@@ -174,6 +178,8 @@ def add_project(category, form):
             category=category,
             title=form.title.data,
             background_url=form.background_image.data,
+            github_url=form.github_url.data,
+            website_url=form.website_url.data,
             description=form.description.data
         )
         db_session.add(new_project)
@@ -190,6 +196,35 @@ def modify_project(project_id, form):
             return False, "Backend form error"
         project.title = form.title.data
         project.background_url = form.background_image.data
+        project.github_url = form.github_url.data
+        project.website_url = form.website_url.data
         project.description = form.description.data
         db_session.commit()
         return True, "Project has been updated"
+
+
+def update_project_settings(project_id, req):
+    with session_handler() as db_session:
+        result = {"success": False, "message": "Unknown server error"}
+        project = db_session.query(Project).filter(Project.project_id == project_id).first()
+        if not project:
+            result["message"] = "No project with ID " + str(project_id)
+        else:
+            if "private" in req:
+                project.private = not project.private
+            if "starred" in req:
+                project.starred = not project.starred
+            db_session.commit()
+            result["success"] = True
+            result["message"] = "Project settings has been updated"
+        return result
+
+
+def remove_project(project_id):
+    with session_handler() as db_session:
+        project = db_session.query(Project).filter(Project.project_id == project_id).first()
+        if not isinstance(project, Project):
+            return False, "No such project"
+        db_session.delete(project)
+        db_session.commit()
+        return True, "Project has been removed"

@@ -11,15 +11,30 @@
 {% block content %}
 
     <div class="pinned-toolbox">
+        <a href="{{ url_for("projects_page") }}" class="toolbox-item">
+            <span class="toolbox-icon icon-back"></span>
+        </a>
         <a href="{{ url_for("edit_project_page", project_id=project.project_id) }}" class="toolbox-item">
             <span class="toolbox-icon icon-edit"></span>
         </a>
-        <span class="toolbox-item">
+        <span class="toolbox-item" data-type="update"
+              data-target="{{ url_for("update_project_api_page", project_id=project.project_id, private="") }}">
             <span class="toolbox-icon icon-private {% if project.private %}active{% endif %}"></span>
         </span>
-        <a href="#" class="toolbox-item">
+        <span class="toolbox-item" data-type="update"
+              data-target="{{ url_for("update_project_api_page", project_id=project.project_id, starred="") }}">
             <span class="toolbox-icon icon-starred {% if project.starred %}active{% endif %}"></span>
-        </a>
+        </span>
+        {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" class="toolbox-item">
+                <span class="toolbox-icon icon-github"></span>
+            </a>
+        {% endif %}
+        {% if project.website_url %}
+            <a href="{{ project.website_url }}" target="_blank" class="toolbox-item">
+                <span class="toolbox-icon icon-web"></span>
+            </a>
+        {% endif %}
 
     </div>
 

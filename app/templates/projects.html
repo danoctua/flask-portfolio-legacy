@@ -34,7 +34,7 @@
                        href="{{ url_for("project_page", project_id=project.project_id) }}">
                         <div class="project-item-bg-image"></div>
                         <div class="project-item-header">
-                            <div class="project-item-name">
+                            <div class="project-item-name {% if project.private %}project-private{% endif %}">
                                 {{ project.title }}
                             </div>
                             <div class="project-item-updated">
@@ -60,7 +60,7 @@
                        href="{{ url_for("project_page", project_id=project.project_id) }}">
                         <div class="project-item-bg-image"></div>
                         <div class="project-item-header">
-                            <div class="project-item-name">
+                            <div class="project-item-name {% if project.private %}project-private{% endif %}">
                                 {{ project.title }}
                             </div>
                             <div class="project-item-updated">
@@ -86,7 +86,7 @@
                    href="{{ url_for("project_page", project_id=project.project_id) }}">
                     <div class="project-item-bg-image"></div>
                     <div class="project-item-header">
-                        <div class="project-item-name">
+                        <div class="project-item-name {% if project.private %}project-private{% endif %}">
                             {{ project.title }}
                         </div>
                         <div class="project-item-updated">

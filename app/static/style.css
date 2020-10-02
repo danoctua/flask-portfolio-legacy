@@ -1,4 +1,3 @@
-@charset "UTF-8";
 :root {
   --primary-bg-color: #ffffff;
   --secondary-bg-color: whitesmoke;
@@ -879,9 +878,6 @@ input, textarea, select {
   background-size: contain;
   background-repeat: no-repeat;
   margin-right: 5px;
-}
-.input-span-group span.icon-image {
-  background-image: url("image.png");
   filter: invert(0.3);
 }
 .input-span-group input {
@@ -920,6 +916,14 @@ input.btn-block {
 
 .btn-submit {
   background-color: #03a87c;
+  color: #fff;
+  padding: 0 1.2em;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #c65d57;
   color: #fff;
   padding: 0 1.2em;
   font-size: 0.8em;
@@ -1187,8 +1191,15 @@ input.btn-block {
 }
 
 .project-item-name.project-private:before {
-  content: "🔒";
+  content: " ";
+  background-image: url("lock.png");
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
   margin-right: 2px;
+  vertical-align: sub;
 }
 
 .project-item:hover {
@@ -1251,28 +1262,40 @@ input.btn-block {
   background-image: url("clock.png");
 }
 
-.toolbox-icon.icon-starred {
+.icon-starred {
   background-image: url("star.png");
 }
 
-.toolbox-icon.icon-starred.active {
+.icon-starred.active {
   background-image: url("star_active.png");
 }
 
-.toolbox-icon.icon-private {
+.icon-private {
   background-image: url("unlock.png");
 }
 
-.toolbox-icon.icon-private.active {
+.icon-private.active {
   background-image: url("lock.png");
 }
 
-.toolbox-icon.icon-edit {
+.icon-edit {
   background-image: url("pen.png");
 }
 
-.toolbox-icon.icon-back {
+.icon-back {
   background-image: url("back.png");
+}
+
+.icon-image {
+  background-image: url("image.png");
+}
+
+.icon-github {
+  background-image: url("github.png");
+}
+
+.icon-web {
+  background-image: url("web.png");
 }
 
 .topic-body h1, .topic-body h2 {
@@ -1458,10 +1481,11 @@ input.btn-block {
     padding-right: 70px;
   }
 }
-@media (min-width: 901px) and (min-width: 1170px) {
+@media (min-width: 901px) and (min-width: 1080px) {
   .pinned-toolbox {
     position: fixed;
-    top: 30%;
+    top: 50%;
+    transform: translateY(-50%);
     left: max(calc(10% - 100px - 2em), 10px);
     display: flex;
     flex-direction: column;
@@ -1471,17 +1495,17 @@ input.btn-block {
     padding: 2em;
   }
 }
-@media (min-width: 901px) and (min-width: 1170px) and (min-width: 1080px) and (max-width: 1170px) {
+@media (min-width: 901px) and (min-width: 1080px) and (min-width: 1080px) and (max-width: 1170px) {
   .pinned-toolbox {
     padding: 0;
   }
 }
-@media (min-width: 901px) and (min-width: 1170px) {
+@media (min-width: 901px) and (min-width: 1080px) {
   .pinned-toolbox:hover {
     opacity: 1;
   }
 }
-@media (min-width: 901px) and (min-width: 1170px) {
+@media (min-width: 901px) and (min-width: 1080px) {
   .toolbox-item {
     width: 40px;
     height: 40px;
@@ -1493,7 +1517,7 @@ input.btn-block {
     padding: 0.5em;
   }
 }
-@media (min-width: 901px) and (min-width: 1170px) {
+@media (min-width: 901px) and (min-width: 1080px) {
   .toolbox-item:hover {
     opacity: 1;
   }
@@ -1781,7 +1805,7 @@ input.btn-block {
     height: 50px;
   }
 }
-@media (max-width: 1169px) {
+@media (max-width: 1079px) {
   .pinned-toolbox {
     display: flex;
     z-index: 10;

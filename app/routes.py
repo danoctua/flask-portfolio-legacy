@@ -100,9 +100,7 @@ def inject_vars():
 
 @app.route('/')
 def home():
-    # notification = checkNotification(session)
     return render_template('about.html', current_function='about')
-    # return render_template('index.html', current_function='index', current='', home=True)
 
 
 @app.route('/studies', methods=['POST', 'GET'])
@@ -141,7 +139,8 @@ def projects_page():
     projects_private = Project.query.filter(Project.category == "private").order_by(db.desc(Project.created_time)).all()
     projects_work = Project.query.filter(Project.category == "work").order_by(db.desc(Project.created_time)).all()
     projects_study = Project.query.filter(Project.category == "study").order_by(db.desc(Project.created_time)).all()
-    return render_template('projects.html', projects_private=projects_private, projects_work=projects_work, projects_study=projects_study)
+    return render_template('projects.html', projects_private=projects_private, projects_work=projects_work,
+                           projects_study=projects_study)
 
 
 @app.route('/projects/<category>/add', methods=["GET", "POST"])
@@ -186,10 +185,30 @@ def edit_project_page(project_id):
             flash(message, "danger")
             return redirect(url_for("edit_project_page", project_id=project_id))
     else:
-        form.title.data = project.title
-        form.background_image.data = project.background_url
-        form.description.data = project.description
+        form.title.data = project.title or ""
+        form.background_image.data = project.background_url or ""
+        form.github_url.data = project.github_url or ""
+        form.website_url.data = project.website_url or ""
+        form.description.data = project.description or ""
     return render_template('project/edit.html', project=project, form=form)
+
+
+@app.route('/projects/<int:project_id>/update', methods=["POST"])
+def update_project_api_page(project_id):
+    req = request.values.to_dict()
+    result = update_project_settings(project_id=project_id, req=req)
+    return jsonify(result)
+
+
+@app.route('/projects/<int:project_id>/remove', methods=["POST"])
+def remove_project_page(project_id):
+    success, message = remove_project(project_id)
+    if success:
+        flash(message, "success")
+        return redirect(url_for("projects_page"))
+    else:
+        flash(message, "danger")
+        return redirect(url_for("edit_project_page", project_id=project_id))
 
 
 @app.route('/contact')

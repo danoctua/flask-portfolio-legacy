@@ -18,9 +18,25 @@
 
         <div class="input-span-group">
             <span class="icon-image"></span>
-        {{ form.background_image(placeholder="Background URL") }}
+            {{ form.background_image(placeholder="Background URL") }}
         </div>
         {% for error in form.background_image.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-github"></span>
+            {{ form.github_url(placeholder="Github repo url") }}
+        </div>
+        {% for error in form.github_url.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-web"></span>
+            {{ form.website_url(placeholder="Website") }}
+        </div>
+        {% for error in form.website_url.errors %}
             <span class="form-error">{{ error }}</span>
         {% endfor %}
 
