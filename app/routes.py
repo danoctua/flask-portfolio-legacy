@@ -169,6 +169,29 @@ def project_page(project_id):
     return render_template('project/index.html', project=project)
 
 
+@app.route('/projects/<int:project_id>/edit', methods=["GET", "POST"])
+def edit_project_page(project_id):
+    project = Project.query.filter(Project.project_id == project_id).first_or_404()
+    form = NewProjectForm()
+    form.submit.label.text = "Update"
+    if form.validate_on_submit():
+        success, message = modify_project(
+            project_id=project_id,
+            form=form
+        )
+        if success:
+            flash(message, "success")
+            return redirect(url_for("project_page", project_id=project_id))
+        else:
+            flash(message, "danger")
+            return redirect(url_for("edit_project_page", project_id=project_id))
+    else:
+        form.title.data = project.title
+        form.background_image.data = project.background_url
+        form.description.data = project.description
+    return render_template('project/edit.html', project=project, form=form)
+
+
 @app.route('/contact')
 def contact_page():
     return render_template('contact.html', current_function='contact')

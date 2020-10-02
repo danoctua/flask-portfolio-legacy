@@ -4,10 +4,27 @@
 
 {% block header_bg %}url({{ project.get_bg_image() }}){% endblock %}
 
-{% block header_text %}{{ project.title }}{% endblock %}
+{% block header_text %}
+    {{ project.title }}
+{% endblock %}
 
 {% block content %}
 
-    {{ project.description }}
+    <div class="pinned-toolbox">
+        <a href="{{ url_for("edit_project_page", project_id=project.project_id) }}" class="toolbox-item">
+            <span class="toolbox-icon icon-edit"></span>
+        </a>
+        <span class="toolbox-item">
+            <span class="toolbox-icon icon-private {% if project.private %}active{% endif %}"></span>
+        </span>
+        <a href="#" class="toolbox-item">
+            <span class="toolbox-icon icon-starred {% if project.starred %}active{% endif %}"></span>
+        </a>
+
+    </div>
+
+    <div class="topic-body">
+        {{ project.parse_description()|safe }}
+    </div>
 
 {% endblock %}

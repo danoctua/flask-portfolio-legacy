@@ -150,6 +150,8 @@ class Project(db.Model):
     background_url = db.Column(db.String(200), default=True)
     description = db.Column(db.Text(5000), nullable=True)
     created_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    starred = db.Column(db.Boolean, default=False)
+    private = db.Column(db.Boolean, default=False)
 
     def __init__(self, category, title, background_url, description):
         self.category = category
@@ -159,6 +161,9 @@ class Project(db.Model):
 
     def get_bg_image(self):
         return self.background_url or url_for('static', filename='project.jpg')
+
+    def parse_description(self):
+        return "<br>".join(self.description.splitlines()) if self.description else "No description"
 
 
 def add_project(category, form):
@@ -174,3 +179,17 @@ def add_project(category, form):
         db_session.add(new_project)
         db_session.commit()
         return True, "New project has been created"
+
+
+def modify_project(project_id, form):
+    with session_handler() as db_session:
+        project = db_session.query(Project).filter(Project.project_id == project_id).first()
+        if not isinstance(project, Project):
+            return False, "No such project"
+        if not isinstance(form, NewProjectForm):
+            return False, "Backend form error"
+        project.title = form.title.data
+        project.background_url = form.background_image.data
+        project.description = form.description.data
+        db_session.commit()
+        return True, "Project has been updated"
