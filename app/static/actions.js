@@ -82,19 +82,22 @@ window.onload = function () {
 
 
     let login_div = document.getElementById('login-div');
-    let login_content_div = document.getElementById('login-content-div');
 
-    login_div.addEventListener('click', function (event) {
-        let targ = event.target;
-        while (targ) {
-            if (targ === login_content_div) {
-                return
+    if (login_div) {
+        let login_content_div = document.getElementById('login-content-div');
+
+        login_div.addEventListener('click', function (event) {
+            let targ = event.target;
+            while (targ) {
+                if (targ === login_content_div) {
+                    return
+                }
+                targ = targ.parentNode;
             }
-            targ = targ.parentNode;
-        }
 
-        hideLogin();
-    }, false);
+            hideLogin();
+        }, false);
+    }
 
 
     // let textarea = document.querySelector(".resize-ta");
@@ -104,7 +107,6 @@ window.onload = function () {
 
     function resizeTextarea(target) {
         target.style.height = "0";
-        console.log(target.scrollHeight + "px")
         target.style.height = target.scrollHeight + "px";
     }
 
@@ -576,7 +578,6 @@ function closeNav() {
 
 function toTheTop() {
     let reverse = document.getElementById('container_up_arrow').classList.contains('reverse');
-    // console.log((window.innerHeight - document.documentElement.scrollTop)*0.3);
     if (!reverse) {
         $('html, body').animate({
             scrollTop: 0
@@ -750,9 +751,9 @@ function hideCloseNav(elem) {
     }
 }
 
-function hideAllNotifications(){
+function hideAllNotifications() {
     let notifications = document.getElementsByClassName("notification-wrapper show");
-    for (let i=0; i < notifications.length; i++){
+    for (let i = 0; i < notifications.length; i++) {
         hideNotification(notifications[i])
     }
 }

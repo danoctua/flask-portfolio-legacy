@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}DanikTL{% endblock %}
+{% block title %}Daniel{% endblock %}
 
 {% block header_bg %}url({{ url_for('static', filename='me.PNG') }}){% endblock %}
 
-{% block header_text %}DanikTL{% endblock %}
+{% block header_text %}Daniel{% endblock %}
 
 {% block content %}
-<div class="paragraph">
-Hi. I'm Daniel. I'm programmer and love to solve different tasks. This website contains some of my projects (probably here will be name with description and link on the GitHub repository).
-Also I use this page to provide my university schedule and unnecessary information about teachers and other helpful things. This page is under construction... So you'll see updates each day.
-If you have proposition, question or anything else - <a href="{{ url_for('contact_page') }}">contact</a> me.
-</div>
+    <h2>who</h2>
+    Student, engineer, minimalist, philanthropist... OK, I'm not an engineer. YET.
+    <h2>what</h2>
+    I'm working on developing modern solutions in different fields. At the last time I've been working on creating web-applications with <b>Python/Flask</b>. Some of my projects are presented and described on this website.
+    <h2>where</h2>
+    You can find them on the <a href="{{ url_for("projects_page") }}">projects page</a>.
+    There projects from my <b>study</b> cycle in Poznan University of Technology, my <b>private</b> projects and projects, I've been solved during my <b>job</b> practice.
+    <h2>howto</h2>
+    If you want to <b>hire</b> me or have any propositions about one of the projects, that are placed on this page, you can do so on the <a href="{{ url_for("contact_page") }}">contact page</a>.
+    <h2>p.s.</h2>
+    This page is <b>under construction</b>, so you can find bugs, which you can report on the <a href="{{ url_for("contact_page") }}">contact page</a>.
 {% endblock %}

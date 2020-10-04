@@ -1,6 +1,4 @@
 import os
-import threading
-
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -10,18 +8,15 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_babel import Babel, _
 import logging
-from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import request
+from logging.handlers import SMTPHandler
 from oauthlib.oauth2 import WebApplicationClient
 from dotenv import load_dotenv
-# from apscheduler.schedulers.background import BackgroundScheduler
-import atexit
 
 dotenv_path = os.path.join(os.path.dirname(__file__), os.pardir, '.flaskenv')
 load_dotenv(dotenv_path)
 
 
-media_version = "1.3"
+media_version = "1.3.1"
 
 
 app = Flask(__name__)
@@ -29,19 +24,15 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = 'home'
 login.login_message = _("Please log in first")
-login.login_message_category = "error"
+login.login_message_category = "danger"
 mail = Mail(app)
 moment = Moment(app)
 babel = Babel(app)
 
 google_client = WebApplicationClient(app.config["GOOGLE_CLIENT_ID"])
 
-
-# @app.route('/')
-# def hello_world():
-#     return 'Hello World!'
 
 from app import routes, models
 

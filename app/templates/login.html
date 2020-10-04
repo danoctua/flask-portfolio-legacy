@@ -1,1 +1,22 @@
-<a href="{{ url_for('google_login') }}">Login with Google</a>
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block blank %}
+    <div class="container-my container-alone">
+
+        <a href="{{ url_for("login_google_midpoint") }}" class="login-content">
+            <span class="google-ico"></span>
+            <span>Login with Google</span>
+            {#            <div><a href="{{ url_for('google_login', start=current_function) }}">Login with Google</a></div>#}
+            {#            <div>or</div>#}
+            {#            <div><a href="#">Ask for access</a></div>#}
+
+        </a>
+
+    </div>
+{% endblock %}
+
+

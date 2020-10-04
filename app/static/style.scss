@@ -115,6 +115,14 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.no-content {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.3em;
+  color: var(--secondary-text-color);
+}
+
 /*-------------colors-----------------*/
 
 body {
@@ -314,7 +322,7 @@ body {
 }
 
 .container-alone {
-  margin: 50px 0!important;
+  margin: 50px 0 !important;
   max-width: 600px;
   min-width: 0;
 }
@@ -1002,7 +1010,7 @@ input:not([type="file"]):focus, textarea:focus {
 }
 
 textarea.input-block {
-  min-height: 400px;
+  min-height: 150px;
   margin: .3em 0;
   transition: .5s;
   overflow: hidden;
@@ -1408,6 +1416,22 @@ input.btn-block {
   background-image: url("github.png");
 }
 
+.icon-telegram {
+  background-image: url("telegram.png");
+}
+
+.icon-linkedin {
+  background-image: url("linkedin.png");
+}
+
+.icon-instagram {
+  background-image: url("instagram.png");
+}
+
+.icon-twitter {
+  background-image: url("twitter.png");
+}
+
 .icon-web {
   background-image: url("web.png");
 }
@@ -1424,9 +1448,12 @@ input.btn-block {
   background-image: url("gender.png");
 }
 
-
 .icon-phone {
   background-image: url("phone.png");
+}
+
+.icon-letter {
+  background-image: url("letter.png");
 }
 
 .topic-body {
@@ -1447,6 +1474,24 @@ input.btn-block {
     }
   }
 
+}
+
+.contact-social-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.contact-social-item {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  padding: .5em;
+  margin: .3em;
 }
 
 

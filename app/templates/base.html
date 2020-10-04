@@ -53,26 +53,26 @@
 
 {% block blank %}
 
-    {% if not current_user.is_authenticated %}
-        <div class="login-div" id="login-div">
-
-            <div class="login-content-div" id="login-content-div">
-                <div class="login-close">
-                    <a href="javascript:void(0)" id="login-close-btn" onclick="hideLogin()">
-                        <img src="{{ url_for('static', filename='close.png') }}" class="png-ico icon-dark">
-                    </a>
-                </div>
-                <a href="{{ url_for("login_google_midpoint") }}" class="login-content">
-                    <span class="google-ico"></span>
-                    <span>Login with Google</span>
+{#    {% if not current_user.is_authenticated %}#}
+{#        <div class="login-div" id="login-div">#}
+{##}
+{#            <div class="login-content-div" id="login-content-div">#}
+{#                <div class="login-close">#}
+{#                    <a href="javascript:void(0)" id="login-close-btn" onclick="hideLogin()">#}
+{#                        <img src="{{ url_for('static', filename='close.png') }}" class="png-ico icon-dark">#}
+{#                    </a>#}
+{#                </div>#}
+{#                <a href="{{ url_for("login_google_midpoint") }}" class="login-content">#}
+{#                    <span class="google-ico"></span>#}
+{#                    <span>Login with Google</span>#}
                     {#            <div><a href="{{ url_for('google_login', start=current_function) }}">Login with Google</a></div>#}
                     {#            <div>or</div>#}
                     {#            <div><a href="#">Ask for access</a></div>#}
-
-                </a>
-            </div>
-        </div>
-    {% endif %}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endif %}#}
 
     <div class="nav-wrapper">
         <div id="mySidenav" class="nav">
@@ -85,7 +85,7 @@
             {#        </a>#}
             {#    </div>#}
             <div class="nav-item">
-                <a class="nav-link" href="{{ url_for("home") }}">DanikTL</a>
+                <a class="nav-link" href="{{ url_for("home") }}">About me</a>
             </div>
             <div class="splitter-space"></div>
             <div class="nav-item">
@@ -97,16 +97,16 @@
             <div class="nav-item">
                 <a class="nav-link" href="{{ url_for("contact_page") }}">Contact</a>
             </div>
-            {% if not current_user.is_authenticated %}
-                <div id="nav-login" class="nav-item">
-                    <div class="nav-link" onclick="showLogin()">Login</div>
-                    <div class="login-container">
-                    </div>
-                </div>
-
-            {% else %}
+            {% if current_user.is_authenticated %}
+{#                <div id="nav-login" class="nav-item">#}
+{#                    <div class="nav-link" onclick="showLogin()">Login</div>#}
+{#                    <div class="login-container">#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#            {% else %}#}
                 <div id="nav-logout" class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout_page', start=current_function) }}">Logout</a>
+                    <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
                 </div>
             {% endif %}
 

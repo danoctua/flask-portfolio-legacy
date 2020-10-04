@@ -1,15 +1,12 @@
 from app import app, media_version, google_client
-from flask import render_template, flash, redirect, url_for, request, abort, g, make_response, jsonify
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from werkzeug.urls import url_parse
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import *
 # from app.email import *
 # from app.bot import *
-from flask_babel import _, Locale
-from flask_babel import lazy_gettext as _l
-from flask_babel import get_locale, force_locale
-from urllib.parse import urlencode
+from flask_babel import _
 import requests, json
 import hashlib
 import hmac
@@ -18,9 +15,16 @@ import base64
 # import telegram
 
 
-
 def get_google_provider_cfg():
     return requests.get(app.config["GOOGLE_DISCOVERY_URL"]).json()
+
+
+@app.route("/login")
+def login_page():
+    if current_user.is_authenticated:
+        flash("You already has been authenticated")
+        return redirect(url_for("home"))
+    return render_template("login.html")
 
 
 @app.route("/login-google")
@@ -76,7 +80,7 @@ def callback():
         flash(_('User email not available or not verified by Google'), "error")
         return redirect(url_for('login'))
     user = User.query.filter_by(email=users_email).first()
-    if user is None:
+    if not user:
         flash(_('Invalid email. You should log in to existing account'), "error")
         return redirect(url_for('home'))
     # if not user.approved:
@@ -234,9 +238,13 @@ def remove_project_page(project_id):
         return redirect(url_for("edit_project_page", project_id=project_id))
 
 
-@app.route('/contact')
+@app.route('/contact', methods=["GET", "POST"])
 def contact_page():
-    return render_template('contact.html', current_function='contact')
+    form = ContactForm()
+    if form.validate_on_submit():
+        flash("Oops... Not working yet", "danger")
+        return redirect(url_for("contact_page"))
+    return render_template('contact.html', form=form)
 
 
 @app.route('/logout')

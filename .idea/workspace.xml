@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf180694-936b-49df-8208-e1a182213067" name="Default Changelist" comment="requirements">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="bf180694-936b-49df-8208-e1a182213067" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/static/instagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/letter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/linkedin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/twitter.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/contact.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/contact.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/telegram.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/telegram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/projects.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +123,7 @@
       <updated>1601284361191</updated>
       <workItem from="1601284365497" duration="35021000" />
       <workItem from="1601465013528" duration="866000" />
-      <workItem from="1601465936318" duration="46861000" />
+      <workItem from="1601465936318" duration="55713000" />
     </task>
     <task id="LOCAL-00001" summary="requirements.txt">
       <created>1601470415452</created>
@@ -250,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601671507664</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ignore update">
+      <created>1601809683996</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1601809683996</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +291,8 @@
     <MESSAGE value="login update" />
     <MESSAGE value="user migration" />
     <MESSAGE value="requirements" />
-    <option name="LAST_COMMIT_MESSAGE" value="requirements" />
+    <MESSAGE value="ignore update" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="622" y="235" width="732" height="644" key="#Inspections" timestamp="1601588495350">
@@ -288,10 +311,10 @@
       <screen x="66" y="27" width="1854" height="1053" />
     </state>
     <state x="726" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/66.27.1854.1053@66.27.1854.1053" timestamp="1601289360010" />
-    <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2" timestamp="1601797277894">
+    <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2" timestamp="1601809683923">
       <screen x="66" y="27" width="1854" height="1053" />
     </state>
-    <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2/66.27.1854.1053@66.27.1854.1053" timestamp="1601797277894" />
+    <state x="349" y="120" width="1304" height="874" key="CommitChangelistDialog2/66.27.1854.1053@66.27.1854.1053" timestamp="1601809683923" />
     <state x="558" y="120" width="860" height="874" key="CommitChangelistDialog2/66.27.3220.1053@66.27.3220.1053" timestamp="1601589999371" />
     <state x="166" y="127" width="1654" height="853" key="DiffContextDialog" timestamp="1601465880255">
       <screen x="66" y="27" width="3220" height="1053" />
@@ -310,10 +333,10 @@
       <screen x="66" y="27" width="3220" height="1053" />
     </state>
     <state x="482" y="188" width="1022" height="737" key="SettingsEditor/66.27.3220.1053@66.27.3220.1053" timestamp="1601465878477" />
-    <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601671508706">
+    <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2" timestamp="1601809685173">
       <screen x="66" y="27" width="1854" height="1053" />
     </state>
-    <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2/66.27.1854.1053@66.27.1854.1053" timestamp="1601671508706" />
+    <state x="367" y="289" width="942" height="535" key="Vcs.Push.Dialog.v2/66.27.1854.1053@66.27.1854.1053" timestamp="1601809685173" />
     <state x="588" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/66.27.3220.1053@66.27.3220.1053" timestamp="1601590000593" />
     <state x="350" y="154" width="857" height="806" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601555688987">
       <screen x="66" y="27" width="1854" height="1053" />
@@ -344,7 +367,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/static/actions.js</url>
-          <line>121</line>
+          <line>123</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
