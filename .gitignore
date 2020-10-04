@@ -1,3 +1,4 @@
 app/data/db_credentials
 venv/
-.idea
+.idea/
+.flaskenv
