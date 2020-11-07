@@ -1421,9 +1421,6 @@ input.btn-block {
     justify-content: center;
     transition: 0.3s;
     z-index: 999;
-  }
-
-  .nav-wrapper:hover {
     background-color: var(--primary-bg-color);
   }
 
