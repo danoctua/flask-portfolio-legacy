@@ -143,7 +143,7 @@ class Project(db.Model):
     background_url = db.Column(db.String(200), default=True)
     github_url = db.Column(db.String(200), nullable=True)
     website_url = db.Column(db.String(200), nullable=True)
-    description = db.Column(db.Text(5000), nullable=True)
+    description = db.Column(db.Text(20000), nullable=True)
     created_time = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     starred = db.Column(db.Boolean, default=False)
     private = db.Column(db.Boolean, default=False)
