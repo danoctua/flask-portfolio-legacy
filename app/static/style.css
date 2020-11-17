@@ -59,6 +59,7 @@
 }
 .quote .quote-source .quote-source a:link {
   font-weight: 500;
+  word-break: break-all;
 }
 
 .theme-switch-wrapper {
