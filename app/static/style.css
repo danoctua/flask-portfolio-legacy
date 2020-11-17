@@ -48,6 +48,19 @@
   margin-right: 10px;
 }
 
+.quote {
+  border-left: 1px solid var(--secondary-text-color);
+  padding-left: 0.5em;
+  font-style: italic;
+}
+.quote .quote-source {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+.quote .quote-source .quote-source a:link {
+  font-weight: 500;
+}
+
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
