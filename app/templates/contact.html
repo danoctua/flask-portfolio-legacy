@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <h2>find me</h2>
+    <h2>follow or contact me:</h2>
 
     <div class="contact-social-container">
         <a href="mailto:danik4tl@gmail.com" class="contact-social-item icon-email"></a>
@@ -20,45 +20,5 @@
     </div>
 
 
-    <h2>or send a message</h2>
 
-
-
-    <form action="" class="form-group" method="post" novalidate>
-        {{ form.hidden_tag() }}
-
-        <div class="input-span-group">
-            <span class="icon-letter"></span>
-            {{ form.message_header(placeholder="Message title") }}
-        </div>
-        {% for error in form.message_header.errors %}
-            <span class="form-error">{{ error }}</span>
-        {% endfor %}
-
-        <div class="input-span-group">
-            <span></span>
-            {{ form.message_body(placeholder="Type your message here...") }}
-        </div>
-        {% for error in form.message_body.errors %}
-            <span class="form-error">{{ error }}</span>
-        {% endfor %}
-
-        <div class="input-span-group">
-            <span class="icon-email"></span>
-            {{ form.email(placeholder="Your email to get response") }}
-        </div>
-        {% for error in form.email.errors %}
-            <span class="form-error">{{ error }}</span>
-        {% endfor %}
-
-        <div class="input-span-group">
-            <span class="icon-user"></span>
-            {{ form.name(placeholder="Introduce yourself") }}
-        </div>
-        {% for error in form.name.errors %}
-            <span class="form-error">{{ error }}</span>
-        {% endfor %}
-
-        {{ form.submit() }}
-    </form>
 {% endblock %}

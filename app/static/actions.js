@@ -522,7 +522,7 @@ function resizeTop() {
             header.style.height = winHeight.toString() + 'px';
             // document.getElementById('header-text').style.lineHeight = (winHeight - 30).toString() + 'px';
         } else {
-            header.style.height = (winHeight * 0.7).toString() + 'px';
+            header.style.height = (winHeight * 0.5).toString() + 'px';
             // document.getElementById('header-text').style.lineHeight = (winHeight * 0.7).toString() + 'px';
         }
     }

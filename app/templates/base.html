@@ -53,26 +53,26 @@
 
 {% block blank %}
 
-{#    {% if not current_user.is_authenticated %}#}
-{#        <div class="login-div" id="login-div">#}
-{##}
-{#            <div class="login-content-div" id="login-content-div">#}
-{#                <div class="login-close">#}
-{#                    <a href="javascript:void(0)" id="login-close-btn" onclick="hideLogin()">#}
-{#                        <img src="{{ url_for('static', filename='close.png') }}" class="png-ico icon-dark">#}
-{#                    </a>#}
-{#                </div>#}
-{#                <a href="{{ url_for("login_google_midpoint") }}" class="login-content">#}
-{#                    <span class="google-ico"></span>#}
-{#                    <span>Login with Google</span>#}
-                    {#            <div><a href="{{ url_for('google_login', start=current_function) }}">Login with Google</a></div>#}
-                    {#            <div>or</div>#}
-                    {#            <div><a href="#">Ask for access</a></div>#}
-{##}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#    {% endif %}#}
+    {#    {% if not current_user.is_authenticated %}#}
+    {#        <div class="login-div" id="login-div">#}
+    {##}
+    {#            <div class="login-content-div" id="login-content-div">#}
+    {#                <div class="login-close">#}
+    {#                    <a href="javascript:void(0)" id="login-close-btn" onclick="hideLogin()">#}
+    {#                        <img src="{{ url_for('static', filename='close.png') }}" class="png-ico icon-dark">#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#                <a href="{{ url_for("login_google_midpoint") }}" class="login-content">#}
+    {#                    <span class="google-ico"></span>#}
+    {#                    <span>Login with Google</span>#}
+    {#            <div><a href="{{ url_for('google_login', start=current_function) }}">Login with Google</a></div>#}
+    {#            <div>or</div>#}
+    {#            <div><a href="#">Ask for access</a></div>#}
+    {##}
+    {#                </a>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    {% endif %}#}
 
     <div class="nav-wrapper">
         <div id="mySidenav" class="nav">
@@ -91,20 +91,20 @@
             <div class="nav-item">
                 <a class="nav-link" href="{{ url_for("projects_page") }}">Projects</a>
             </div>
-{#            <div class="nav-item">#}
-{#                <a class="nav-link" href="{{ url_for("studies_page") }}">Studies</a>#}
-{#            </div>#}
+            {#            <div class="nav-item">#}
+            {#                <a class="nav-link" href="{{ url_for("studies_page") }}">Studies</a>#}
+            {#            </div>#}
             <div class="nav-item">
                 <a class="nav-link" href="{{ url_for("contact_page") }}">Contact</a>
             </div>
             {% if current_user.is_authenticated %}
-{#                <div id="nav-login" class="nav-item">#}
-{#                    <div class="nav-link" onclick="showLogin()">Login</div>#}
-{#                    <div class="login-container">#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#            {% else %}#}
+                {#                <div id="nav-login" class="nav-item">#}
+                {#                    <div class="nav-link" onclick="showLogin()">Login</div>#}
+                {#                    <div class="login-container">#}
+                {#                    </div>#}
+                {#                </div>#}
+                {##}
+                {#            {% else %}#}
                 <div id="nav-logout" class="nav-item">
                     <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
                 </div>
@@ -147,47 +147,50 @@
         <div></div>
     </div>
 
-    {% block no_header %}
+    <div class="main-wrapper">
 
-        <div class="header overlay" id="header">
+        {% block no_header %}
 
-            <div class="header-image-div" id="header-bg"
-                 style="background-image: {% block header_bg %}url({{ url_for('static', filename='temple.JPG') }}){% endblock %}">
+            <div class="header overlay" id="header">
 
+                <div class="header-image-div" id="header-bg"
+                     style="background-image: {% block header_bg %}url({{ url_for('static', filename='temple.JPG') }}){% endblock %}">
+
+                </div>
+                <div class="header-text" id="header-text">{% block header_text %}DanikTL{% endblock %}</div>
             </div>
-            <div class="header-text" id="header-text">{% block header_text %}DanikTL{% endblock %}</div>
-        </div>
 
-    {% endblock %}
+        {% endblock %}
 
-    <div class="container-my" id="container">
-        <div id="arrow-up-nav" class="arrow-up-div" onclick="toTheTop()">
+        <div class="container-my" id="container">
+            <div id="arrow-up-nav" class="arrow-up-div" onclick="toTheTop()">
             <span class="png-btn" href="javascript:void(0)"><img
                     class="container_up_arrow reverse icon-dark" id="container_up_arrow"
                     src="{{ url_for('static', filename='arrow_up.ico') }}">
             </span>
+            </div>
+            <div class="the-blur hide" id="blur-header"></div>
+            {% block content %}
+            {% endblock %}
         </div>
-        <div class="the-blur hide" id="blur-header"></div>
-        {% block content %}
+
+
+        {% block footer %}
+
+            <div class="footer">
+                <div class="footer-top">
+
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-copyright">
+                        © 2020 DanikTL
+                    </div>
+                </div>
+
+            </div>
+
         {% endblock %}
     </div>
-
-
-    {% block footer %}
-
-        <div class="footer">
-            <div class="footer-top">
-
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    © 2020 DanikTL
-                </div>
-            </div>
-
-        </div>
-
-    {% endblock %}
 
 {% endblock %}
 
