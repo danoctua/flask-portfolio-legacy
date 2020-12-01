@@ -2,22 +2,28 @@
 
 {% block title %}Projects{% endblock %}
 
-{% block header_bg %}url({{ url_for('static', filename='project.jpg') }}){% endblock %}
+{% block header_bg %}url({{ url_for('static', filename='project1.jpg') }}){% endblock %}
 
 {% block header_text %}Projects{% endblock %}
 
 {% block content %}
 
     <div class="tab-switcher">
+        {% if projects_private or current_user.is_authenticated %}
         <div class="tab-link" data-target="tab-pan-private">
             Private
         </div>
+        {% endif %}
+        {% if projects_work or current_user.is_authenticated %}
         <div class="tab-link" data-target="tab-pan-work">
             Work
         </div>
+        {% endif %}
+        {% if projects_study or current_user.is_authenticated %}
         <div class="tab-link" data-target="tab-pan-study">
             Study
         </div>
+        {% endif %}
 
     </div>
 
@@ -94,7 +100,7 @@
 
         {% for project in projects_study %}
             <div class="project-item-wrapper">
-                <a class="project-item" style="background-image: url({{ project.get_bg_image() }})"
+                <a class="project-item{% if project.starred %} project-starred{% endif %}" style="background-image: url({{ project.get_bg_image() }})"
                    href="{{ url_for("project_page", project_id=project.project_id) }}">
                     <div class="project-item-bg-image"></div>
                     <div class="project-item-header">

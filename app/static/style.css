@@ -145,7 +145,7 @@ input:checked + .slider:before {
 
 a:link, a:visited {
   color: var(--link-blue);
-  opacity: 0.7;
+  opacity: 0.8;
   transition: 0.3s;
   text-decoration: underline;
 }
@@ -347,6 +347,10 @@ button.btn-block {
   width: 100%;
   box-sizing: border-box;
   margin: 0.3em 0;
+}
+
+button.btn-primary {
+  background-color: #2a403d;
 }
 
 button::-moz-focus-inner {
@@ -1175,12 +1179,13 @@ input.btn-block {
 }
 
 .project-item {
+  position: relative;
   border-radius: 8px;
   background-color: var(--secondary-bg-color);
   transition: 0.3s;
   height: 100%;
   width: 100%;
-  background-image: url("project.jpg");
+  background-image: url("project1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
@@ -1190,6 +1195,17 @@ input.btn-block {
   -moz-box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.2);
   text-decoration: none !important;
+}
+
+.project-item.project-starred:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  height: 40px;
+  width: 40px;
+  background-image: url("bookmark_active.png");
+  background-size: contain;
 }
 
 .project-item-bg-image {
@@ -1221,9 +1237,13 @@ input.btn-block {
   font-weight: 600;
   padding: 10px;
   flex: none;
-  border-radius: 8px;
+  text-align: center;
+  border-radius: 0 0 8px 8px;
   transition: 0.3s;
   z-index: 2;
+}
+.project-item-header .project-item-name {
+  font-size: 1.2em;
 }
 .project-item-header .project-item-updated {
   font-weight: 300;
@@ -1242,7 +1262,9 @@ input.btn-block {
 }
 
 .project-item:hover {
-  transform: translateY(-20px);
+  -webkit-box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
 .tab-switcher {
@@ -1376,6 +1398,12 @@ input.btn-block {
 .topic-body h1, .topic-body h2 {
   line-height: 1.3;
   margin: 0.5em 0;
+}
+.topic-body h1 {
+  font-size: 1.6em;
+}
+.topic-body h2 {
+  font-size: 1.4em;
 }
 .topic-body h1, .topic-body h2, .topic-body ol, .topic-body ul {
   display: inline-block;

@@ -157,7 +157,7 @@ class Project(db.Model):
         self.description = description
 
     def get_bg_image(self):
-        return self.background_url or url_for('static', filename='project.jpg')
+        return self.background_url or url_for('static', filename='project1.jpg')
 
     def parse_description(self):
         return "<br>".join(self.description.splitlines()) if self.description else "No description"
@@ -221,6 +221,25 @@ def remove_project(project_id):
         db_session.delete(project)
         db_session.commit()
         return True, "Project has been removed"
+
+
+def get_projects(authenticated: bool) -> (list, list, list):
+    with session_handler() as db_session:
+        projects = db_session.query(Project)
+        if not authenticated:
+            projects = projects.filter(Project.private == False)
+        projects_private = projects.filter(
+            Project.category == "private"
+        ).order_by(
+            db.desc(Project.created_time)).all()
+        projects_work = projects.filter(
+            Project.category == "work"
+        ).order_by(db.desc(Project.created_time)).all()
+        projects_study = projects.filter(
+            Project.category == "study"
+        ).order_by(db.desc(Project.created_time)).all()
+        return projects_private, projects_work, projects_study
+
 
 
 def add_user(form):

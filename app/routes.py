@@ -160,9 +160,7 @@ def studies_page():
 
 @app.route('/projects')
 def projects_page():
-    projects_private = Project.query.filter(Project.category == "private").order_by(db.desc(Project.created_time)).all()
-    projects_work = Project.query.filter(Project.category == "work").order_by(db.desc(Project.created_time)).all()
-    projects_study = Project.query.filter(Project.category == "study").order_by(db.desc(Project.created_time)).all()
+    projects_private, projects_work, projects_study = get_projects(current_user.is_authenticated)
     return render_template('projects.html', projects_private=projects_private, projects_work=projects_work,
                            projects_study=projects_study)
 
