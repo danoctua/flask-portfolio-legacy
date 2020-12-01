@@ -231,13 +231,21 @@ def get_projects(authenticated: bool) -> (list, list, list):
         projects_private = projects.filter(
             Project.category == "private"
         ).order_by(
-            db.desc(Project.created_time)).all()
+            -Project.starred,
+            -Project.created_time
+        ).all()
         projects_work = projects.filter(
             Project.category == "work"
-        ).order_by(db.desc(Project.created_time)).all()
+        ).order_by(
+            -Project.starred,
+            -Project.created_time
+        ).all()
         projects_study = projects.filter(
             Project.category == "study"
-        ).order_by(db.desc(Project.created_time)).all()
+        ).order_by(
+            -Project.starred,
+            -Project.created_time
+        ).all()
         return projects_private, projects_work, projects_study
 
 
