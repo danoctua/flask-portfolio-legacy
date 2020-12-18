@@ -2,4 +2,5 @@ app/data/db_credentials
 venv/
 .idea/
 .flaskenv
-__pycache__/
+*__pycache__/
+*.pem
