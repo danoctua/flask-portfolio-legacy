@@ -14,7 +14,7 @@ body {
 
 .h-wrapper {
   flex: 1;
-  padding: 70px 10px;
+  padding: 70px 10px 10px;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -73,16 +73,18 @@ body {
 .invitation .invitation-link {
   position: relative;
   text-decoration: none;
-  background-color: white;
-  padding: 0.2em 1em;
+  background-color: #e3eadd;
+  padding: 0.4em 1em;
   color: #405233;
   font-weight: 700;
   transition: 0.3s;
+  border-radius: 10px;
 }
 .invitation .invitation-link:hover {
   -webkit-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
   -moz-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
   box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  background-color: #c2d0b6;
 }
 .invitation .invitation-link:before, .invitation .invitation-link:after {
   z-index: -1;
@@ -91,6 +93,7 @@ body {
   content: " ";
   width: 30px;
   height: 30px;
+  border-radius: 10px;
 }
 .invitation .invitation-link:before {
   bottom: -5px;
@@ -99,6 +102,22 @@ body {
 .invitation .invitation-link:after {
   top: -5px;
   right: -5px;
+}
+.invitation .invitation-gift {
+  text-align: center;
+  padding: 60px 0 0;
+}
+.invitation .invitation-gift .invitation-gift-wrapper {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.invitation .invitation-gift .invitation-gift-wrapper .invitation-gift-item {
+  width: 150px;
+  margin: 10px;
+}
+.invitation .invitation-gift .invitation-gift-wrapper .invitation-gift-item .key {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=wedding.css.map */
