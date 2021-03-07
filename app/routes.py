@@ -1,5 +1,5 @@
 from app import app, media_version, google_client
-from flask import render_template, flash, redirect, url_for, request, jsonify
+from flask import render_template, flash, redirect, url_for, request, jsonify, abort
 from werkzeug.urls import url_parse
 from app.forms import *
 from flask_login import current_user, login_user, logout_user, login_required
@@ -243,6 +243,14 @@ def contact_page():
         flash("Oops... Not working yet", "danger")
         return redirect(url_for("contact_page"))
     return render_template('contact.html', form=form)
+
+
+@app.route('/wedding', methods=['GET'])
+def wedding_page():
+    name = request.values.get("name")
+    if not name:
+        abort(404)
+    return render_template('wedding.html', name=name)
 
 
 @app.route('/logout')
