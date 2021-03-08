@@ -13,6 +13,7 @@ import jwt
 from app.forms import NewProjectForm, UserForm
 from flask_babel import _, get_locale, force_locale
 from flask import url_for
+import json
 
 from sqlalchemy.ext.hybrid import hybrid_property
 from string import ascii_letters, digits
@@ -163,6 +164,117 @@ class Project(db.Model):
         return "<br>".join(self.description.splitlines()) if self.description else "No description"
 
 
+# No SQL
+class Wedding:
+    date: datetime.date = None
+    time: datetime.time = None
+    remote_id: str = None
+    remote_password: str = None
+    remote_link: str = None
+    invitees: list = []
+    output: dict = {}
+
+    def get_time_display(self, timezone: int = 0) -> str:
+        return self.time.replace(hour=self.time.hour + timezone).strftime("%H:%M")
+
+    def get_date_display(self):
+        return self.date.strftime("%d %B %Y")
+
+    def get_datetime(self):
+        import pytz
+        tz = pytz.timezone("CET")
+        full_datetime = datetime.datetime(year=self.date.year, month=self.date.month, day=self.date.day,
+                                          hour=self.time.hour, minute=self.time.minute)
+
+        return tz.localize(full_datetime)
+
+    def get_datetime_end(self):
+        return self.get_datetime() + datetime.timedelta(minutes=30)
+
+    def is_today(self):
+        return self.date == datetime.datetime.now().date()
+
+    def load(self, fp: str) -> bool:
+        try:
+            with open(fp, "r") as file:
+                data_raw = file.read()
+                file.close()
+            data = json.loads(data_raw)
+        except:
+            self.save(fp)
+            return True
+
+        self.date = data.get("date")
+        if self.date:
+            try:
+                self.date = datetime.datetime.strptime(self.date, "%m/%d/%Y").date()
+            except:
+                self.date = None
+        self.time = data.get("time")
+        if self.time:
+            try:
+                self.time = datetime.datetime.strptime(self.time, "%H:%M").time()
+            except:
+                self.time = None
+        self.remote_id = data.get("remote_id")
+        self.remote_password = data.get("remote_password")
+        self.remote_link = data.get("remote_link")
+        self.invitees = [WeddingInvitation(people_=x.get("people"), invited_=x.get("invited"))
+                         for x in data.get("invitees")]
+        return True
+
+    def update(self, fp: str, data) -> bool:
+        self.date = data.date.data
+        self.time = data.time.data
+        self.remote_id = data.remote_id.data
+        self.remote_password = data.remote_password.data
+        self.remote_link = data.remote_link.data
+        self.invitees = [WeddingInvitation(invitee=x) for x in data.invitees if x]
+        for people in data.invitees_new.data.split("\n"):
+            if people:
+                self.invitees.append(WeddingInvitation(people_=people))
+        self.save(fp=fp)
+        return True
+
+    def save(self, fp: str) -> bool:
+        self.parse_to_json()
+        with open(fp, "w") as file:
+            file.write(json.dumps(self.output, indent=4))
+            file.close()
+        return True
+
+    def parse_to_json(self):
+        # breakpoint()
+        self.output = {
+            "date": self.date.strftime("%m/%d/%Y") if isinstance(self.date, datetime.date) else self.date,
+            "time": self.time.strftime("%H:%M") if isinstance(self.time, datetime.time) else self.time,
+            "remote_id": self.remote_id,
+            "remote_password": self.remote_password,
+            "remote_link": self.remote_link,
+            "invitees": [invitee.parse_to_json() for invitee in self.invitees]
+        }
+
+
+class WeddingInvitation:
+    people: str = None
+    invited: bool = False
+    output: dict = {}
+
+    def __init__(self, people_: str = None, invited_: bool = False, invitee=None):
+        if not people_ and invitee:
+            people_ = invitee.people.data
+            invited_ = invitee.invited.data
+        self.people = people_
+        self.invited = invited_
+
+    def parse_to_json(self):
+        self.output = {
+            "people": self.people,
+            "invited": self.invited
+        }
+        return self.output
+
+
 def add_project(category, form):
     with session_handler() as db_session:
         if not isinstance(form, NewProjectForm):
@@ -247,7 +359,6 @@ def get_projects(authenticated: bool) -> (list, list, list):
             -Project.created_time
         ).all()
         return projects_private, projects_work, projects_study
-
 
 
 def add_user(form):

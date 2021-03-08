@@ -15,6 +15,9 @@
             type="application/javascript"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='wedding.css') }}?v={{ media_version }}" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
+    {{ moment.locale("ru") }}
 </head>
 <body>
 
@@ -24,30 +27,62 @@
             <div class="header-image-wrapper">
                 <img src="" alt="">
             </div>
-            <h1>Приглашение на свадьбу</h1>
+            <h1>Даниил & Мария</h1>
 
             <div class="invitation-body">
-                Привет, {{ name }}!<br>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, est eum exercitationem expedita
-                facere harum ipsam maiores obcaecati officiis perferendis possimus provident repellendus, sapiente
-                similique suscipit vitae voluptate. Incidunt, odit.
+                <p>Привет, {{ name }}!</p>
+                <p>
+                    В нашей жизни есть счастливые и радостные моменты, которые хочется разделить с дорогими людьми.
+                    Поэтому мы приглашаем Вас открыть вместе с нами новую страницу книги нашей жизни! Мы будем искренне
+                    рады разделить этот день вместе с Вами.
+                </p>
             </div>
             <div class="invitation-footer">
+                Речь прозвучит:
                 <div class="invitation-footer-item">
                     <div class="key">Дата</div>
-                    <div class="value">03 апреля 2021</div>
+                    <div class="value">{{ moment(wedding_data.get_datetime()).format("LL") }}</div>
                 </div>
                 <div class="invitation-footer-item">
                     <div class="key">Время</div>
-                    <div class="value">15:00 (Варшава), 16:00 (Киев), 17:00 (Минск)</div>
+                    <div class="value">
+                        {{ moment(wedding_data.get_datetime()).format("LT") }}
+                    </div>
                 </div>
+                <div class="invitation-footer-item">
+                    <div class="key">Где</div>
+                    <div class="value">Zoom</div>
+                </div>
+                {% if wedding_data.is_today() %}
+                    <div class="invitation-footer-item">
+                        <div class="key">Номер конференции</div>
+                        <div class="value">{{ wedding_data.remote_id }}</div>
+                    </div>
+                    <div class="invitation-footer-item">
+                        <div class="key">Пароль конференции</div>
+                        <div class="value">{{ wedding_data.remote_password }}</div>
+                    </div>
+                {% endif %}
 
-                <a href="#">Добавь напоминание в свой календарь</a>
+                <p>
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Свадьба&dates={{ wedding_data.get_datetime().strftime("%Y%m%dT%H%M%S.%fZ") }}/{{ wedding_data.get_datetime_end().strftime("%Y%m%dT%H%M%S.%fZ") }}&details=&location=Zoom&trp=true">Добавь
+                        напоминание в свой календарь</a>
+                </p>
 
             </div>
-            <div class="invitation-link-wrapper">
-                <a href="#" class="invitation-link">Подключиться к конференции</a>
-            </div>
+            {% if wedding_data.is_today() %}
+                <div class="invitation-link-wrapper">
+                    <a href="{{ wedding_data.remote_link }}" class="invitation-link">Подключиться к конференции</a>
+                </div>
+            {% else %}
+                P.S. В день свадьбы, здесь появятся данные для подключения, поэтому сохраните пожалуйста ссылку :)
+            {% endif %}
+
+            <p>
+                По всем вопросам обращайтесь к нам.
+                Будем рады, если Вы подтвердите свое присутствие
+                до {{ moment(wedding_data.get_datetime() - datetime.timedelta(days=7)).format("LL") }}.
+            </p>
 
             <div class="invitation-gift">
                 Сделать подарок:

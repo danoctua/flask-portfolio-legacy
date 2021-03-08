@@ -2,7 +2,7 @@
 
 $header-color: #303030;
 $text-color: #212121;
-$accent-color: #405233;
+$accent-color: #374929;
 
 body {
   font-family: 'Bad Script', sans-serif;
@@ -18,6 +18,7 @@ body {
   position: relative;
   margin: 0;
   z-index: -1;
+  font-size: 125%;
 }
 
 
@@ -39,19 +40,30 @@ body {
 
 }
 
+.shadow {
+  -webkit-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  -moz-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+}
+
 .invitation {
+
+  @extend .shadow;
 
   position: relative;
 
   z-index: 1;
   padding: 10px 15px;
   background-color: white;
+  border-radius: 10px;
+  line-height: 1.5;
 
   min-height: 300px;
 
   h1 {
     font-size: 2em;
     color: $header-color;
+    text-align: center;
   }
 
   .header-image-wrapper {
@@ -59,12 +71,15 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
+
 
     img {
       width: 120px;
       height: 120px;
       background-color: white;
-      border: 3px solid #667c59;
+      border: 4px solid #667c59;
+      border-radius: 10px;
 
     }
   }
@@ -83,6 +98,7 @@ body {
         font-weight: 600;
         margin-right: 10px;
         white-space: nowrap;
+        color: $accent_color
       }
 
       .key:after {
@@ -109,9 +125,7 @@ body {
   }
 
   .invitation-link:hover {
-    -webkit-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
-    -moz-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
-    box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+    @extend .shadow;
     background-color: #c2d0b6;
   }
 
@@ -148,6 +162,7 @@ body {
 
         width: 150px;
         margin: 10px;
+
         .key {
           font-weight: 600;
         }

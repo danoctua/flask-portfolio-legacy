@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Setup wedding{% endblock %}
+
+{% block no_header %}
+    <div class="fake-header"></div> {% endblock %}
+
+{% block content %}
+
+    <div class="pinned-toolbox">
+        <a href="{{ url_for("wedding_page") }}" class="toolbox-item">
+            <span class="toolbox-icon icon-back"></span>
+        </a>
+
+    </div>
+
+    <form action="" class="form-group" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="subsection-header">Date and time</div>
+        {{ form.date(value=wedding_data.date) }}
+        {% for error in form.date.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.time(value=wedding_data.time) }}
+        {% for error in form.time.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="subsection-header">Remote access</div>
+
+        <div class="input-span-group">
+            <span class="icon-phone"></span>
+            {{ form.remote_id }}
+        </div>
+        {% for error in form.remote_id.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-private"></span>
+            {{ form.remote_password }}
+        </div>
+        {% for error in form.remote_password.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="input-span-group">
+            <span class="icon-web"></span>
+            {{ form.remote_link }}
+        </div>
+        {% for error in form.remote_link.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="subsection-header">Invitations</div>
+
+
+        {% for invitee in form.invitees %}
+            <div class="inline-form">
+                {{ invitee.invited }}
+                {{ invitee.people }}
+            </div>
+        {% endfor %}
+
+        {{ form.invitees_new }}
+        {% for error in form.invitees_new.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        {{ form.submit }}
+    </form>
+
+{% endblock %}

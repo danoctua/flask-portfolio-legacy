@@ -1,3 +1,5 @@
+import os
+
 from app import app, media_version, google_client
 from flask import render_template, flash, redirect, url_for, request, jsonify, abort
 from werkzeug.urls import url_parse
@@ -248,9 +250,37 @@ def contact_page():
 @app.route('/wedding', methods=['GET'])
 def wedding_page():
     name = request.values.get("name")
-    if not name:
+    wedding_data = Wedding()
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    wedding_file_location = os.path.join(dir_path, os.getenv("WEDDING_SETUP_PATH"))
+    wedding_data.load(wedding_file_location)
+    wedding_data.parse_to_json()
+    if not name or not any(x.people == name for x in wedding_data.invitees):
         abort(404)
-    return render_template('wedding.html', name=name)
+    return render_template('wedding.html', name=name, wedding_data=wedding_data, datetime=datetime)
+
+
+@app.route('/wedding-setup', methods=['GET', 'POST'])
+# @login_required
+def wedding_setup_page():
+
+    wedding_data = Wedding()
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    wedding_file_location = os.path.join(dir_path, os.getenv("WEDDING_SETUP_PATH"))
+    wedding_data.load(wedding_file_location)
+    wedding_data.parse_to_json()
+    form = WeddingSetupForm(data=wedding_data.output)
+
+    if form.validate_on_submit():
+        success = wedding_data.update(wedding_file_location, form)
+        if success:
+            flash("Wedding data has been updated", "success")
+        else:
+            flash("Oops. Something went wrong", "danger")
+        return redirect(url_for("wedding_setup_page"))
+    else:
+        print(form.errors)
+    return render_template('wedding-setup.html', form=form, wedding_data=wedding_data)
 
 
 @app.route('/logout')

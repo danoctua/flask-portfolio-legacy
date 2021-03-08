@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField, TextAreaField, \
-    DateField, DateTimeField, TimeField, IntegerField, FileField
+from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField, SelectField, DecimalField, TextAreaField, \
+    DateField, DateTimeField, TimeField, IntegerField, FileField, FieldList, FormField
 from wtforms.validators import DataRequired, NumberRange, Email, Length, EqualTo, Optional
 # from flask_babel import lazy_gettext as _l
 import pycountry
@@ -40,3 +40,20 @@ class ContactForm(FlaskForm):
     message_body = TextAreaField(validators=[DataRequired(), Length(max=5000)],
                                  render_kw={"class": "input-block"})
     submit = SubmitField('Send', render_kw={"class": "btn-submit"})
+
+
+class WeddingInvitationForm(Form):
+    people = StringField(render_kw={"placeholder": "Full name", "readonly":""})
+    invited = BooleanField()
+
+
+class WeddingSetupForm(FlaskForm):
+    date = DateField(render_kw={"type": "date"})
+    time = TimeField(render_kw={"type": "time"})
+    remote_id = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting ID"})
+    remote_password = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting password"})
+    remote_link = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting link"})
+    invitees = FieldList(FormField(WeddingInvitationForm))
+    invitees_new = TextAreaField(render_kw={"class": "input-block",
+                                            "placeholder": "Enter full names of invitees for each invite in new line"})
+    submit = SubmitField('Update', render_kw={"class": "btn-submit"})

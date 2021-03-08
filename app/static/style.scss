@@ -1418,6 +1418,20 @@ input.btn-block {
   flex-wrap: wrap;
 }
 
+.inline-form {
+  display: flex;
+  align-items: center;
+  input {
+    display: inline;
+  }
+  input[type='checkbox'] {
+    width: 25px;
+    height: 25px;
+    min-height: 25px;
+    margin: 0 5px;
+  }
+}
+
 
 .toolbox-icon {
   display: inline-block;

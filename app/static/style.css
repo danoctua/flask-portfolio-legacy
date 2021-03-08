@@ -1314,6 +1314,20 @@ input.btn-block {
   flex-wrap: wrap;
 }
 
+.inline-form {
+  display: flex;
+  align-items: center;
+}
+.inline-form input {
+  display: inline;
+}
+.inline-form input[type=checkbox] {
+  width: 25px;
+  height: 25px;
+  min-height: 25px;
+  margin: 0 5px;
+}
+
 .toolbox-icon {
   display: inline-block;
   width: 100%;
