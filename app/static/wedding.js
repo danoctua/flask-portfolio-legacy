@@ -1,4 +1,4 @@
-window.onload = function () {
+window.addEventListener("load", function () {
     let copyButtons = document.getElementsByClassName("copy-button")
     let removeInviteButton = document.getElementsByClassName("remove-invite-button")
     let actions = ['tap', 'click']
@@ -14,7 +14,7 @@ window.onload = function () {
             })
         }
     }
-}
+})
 
 function copyToClipboard(obj) {
     /* Get the text field */

@@ -13,27 +13,7 @@ if (currentTheme) {
 
 window.onload = function () {
 
-
-    // const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-    //
-    //
-    // if (currentTheme === 'dark') {
-    //     toggleSwitch.checked = true;
-    // }
-    //
-    //
-    // function switchTheme(e) {
-    //     if (e.target.checked) {
-    //         document.documentElement.setAttribute('data-theme', 'dark');
-    //         localStorage.setItem('theme', 'dark');
-    //     } else {
-    //         document.documentElement.setAttribute('data-theme', 'light');
-    //         localStorage.setItem('theme', 'light');
-    //     }
-    // }
-    //
-    // toggleSwitch.addEventListener('change', switchTheme, false);
-    // hideHelp();
+    console.log("here")
 
     function updateProject(target) {
         if (target.classList.contains("toolbox-icon")) {
@@ -99,12 +79,6 @@ window.onload = function () {
         }, false);
     }
 
-
-    // let textarea = document.querySelector(".resize-ta");
-    // textarea.addEventListener("keyup", () => {
-    //     textarea.style.height = calcHeight(textarea.value) + "px";
-    // });
-
     function resizeTextarea(target) {
         target.style.height = "0";
         target.style.height = target.scrollHeight + "px";
@@ -119,21 +93,6 @@ window.onload = function () {
             })
         }
     }
-
-
-    // let main = document.getElementById('main');
-    // let sideNavBar = document.getElementById('mySidenav');
-    // main.addEventListener('click', function (event) {
-    //     let targ = event.target;
-    //     while (targ) {
-    //         if (targ === sideNavBar) {
-    //             return
-    //         }
-    //         targ = targ.parentNode;
-    //     }
-    //     closeNav();
-    // }, false);
-
 
     let notification_wrappers = document.getElementsByClassName('notification-wrapper');
     for (let i = 0; i < notification_wrappers.length; i++) {
