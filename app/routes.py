@@ -263,7 +263,6 @@ def wedding_page():
 @app.route('/wedding-setup', methods=['GET', 'POST'])
 # @login_required
 def wedding_setup_page():
-
     wedding_data = Wedding()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     wedding_file_location = os.path.join(dir_path, os.getenv("WEDDING_SETUP_PATH"))
@@ -289,92 +288,3 @@ def logout_page():
     logout_user()
     flash("You has been logged out", "success")
     return redirect(url_for('home'))
-#
-# @app.route('/vogue', methods=['GET', 'POST'])
-# def vogue():
-#     is_logged_in()
-#     result = []
-#     if request.method == 'POST':
-#         req = request.values.to_dict()
-#         # print(req)
-#         if 'get_schedule' in req:
-#
-#             if 'days_step' in req: day_step = int(req['days_step'])
-#             else: day_step = 1
-#             if req['sms'] == 'telegram': telegram_messages = True
-#             else: telegram_messages = False
-#             if 'schedule' not in req: not_schedule = True
-#             else: not_schedule = False
-#             change_status('working')
-#             pr = Process(target=get_schedule, args=[day_step, telegram_messages, tommorow_notes, schedule, not_schedule])
-#             pr.start()
-#             return redirect(url_for('vogue'))
-#         elif 'ru' in req.keys():
-#             ru_text = req['ru']
-#             pl_text = req['pl']
-#             new1, new2 = backformating(ru_text), backformating(pl_text, 'pl')
-#             if new1:
-#                 open(os.path.join(dir_path, 'data', 'main_text_ru_backup'), 'w').write(open(os.path.join(dir_path, 'data', 'main_text_ru'), 'r').read())
-#                 open(os.path.join(dir_path, 'data', 'main_text_ru'), 'w').write(new1)
-#             if new2:
-#                 open(os.path.join(dir_path, 'data', 'main_text_pl_backup'), 'w').write(open(os.path.join(dir_path, 'data', 'main_text_pl'), 'r').read())
-#                 open(os.path.join(dir_path, 'data', 'main_text_pl'), 'w').write(new2)
-#             if new1 and new2:
-#                 result = [True, "Текст был обновлён"]
-#             else:
-#                 result = [False, 'Один или оба текстов не были обновлены. Возможно проблема с форматирование']
-#         elif 'backup' in req:
-#             open(os.path.join(dir_path, 'data', 'main_text_ru'), 'w').write(
-#                 open(os.path.join(dir_path, 'data', 'main_text_ru_backup'), 'r').read())
-#             open(os.path.join(dir_path, 'data', 'main_text_pl'), 'w').write(
-#                 open(os.path.join(dir_path, 'data', 'main_text_pl_backup'), 'r').read())
-#             result = [True, 'Прошлый текст возвращён']
-#
-#         elif 'start-reset' in req:
-#             CONFIG['sp'] = 3
-#             io.open(CONFIG_PATH, 'w', encoding='utf-8').write(str(CONFIG))
-#             result = [True, 'Начало поиска даты сброшено до 3']
-#
-#         elif 'android' in req.keys():
-#             redirect_sms_url = sendSMS(req)
-#             return redirect(redirect_sms_url)
-#         elif 'iphone' in req.keys():
-#             redirect_sms_url = sendSMS(req)
-#             return redirect(redirect_sms_url)
-#         elif 'reset-sms' in req.keys():
-#             tommorow_notes.clear()
-#             # print(ru_text, pl_text)
-#     updateConfig()
-#     updateMessages()
-#     data = eval(open(STATE_VOGUE_PATH, 'r').read())
-#     status = data['status']
-#     if datetime.datetime.strptime(CONFIG['current_schedule'], '%d.%m.%Y').date() < (datetime.datetime.today()).date() \
-#             and status != 'working':
-#         change_status('working')
-#         pr = Process(target=get_schedule, args=[1, False, tommorow_notes, schedule, True])
-#         pr.start()
-#     vogue_state = eval(open(STATE_VOGUE_PATH, 'r').read())
-#     status = vogue_state['status']
-#     # status = 'error'
-#     log = vogue_state['log'] if vogue_state['log']!="" else None
-#     # log = 'Google API was updated. Please, edit your interaction with a module'
-#     last_req_time = vogue_state['time'] if vogue_state['time']!="" else None
-#     ru = open(os.path.join(dir_path, 'data', 'main_text_ru'), 'r').read()
-#     ru_ls = ru.format('...Добрый день...', "...время визита...", "...хорошего дня...").splitlines()
-#     pl = open(os.path.join(dir_path, 'data', 'main_text_pl'), 'r').read()
-#     pl_ls = pl.format('...Dzień dobry...', "...czas wizyty...", "...miłęgo dnia...").splitlines()
-#     max_layer = max([len(i) for i in schedule.values()]) if len(schedule) > 0 else 0
-#     return render_template('vogue.html', status=status, log=log, last_req_time=last_req_time, ru=ru, pl=pl,
-#                            result=result, ru_ls=ru_ls, pl_ls=pl_ls, tommorow_notes=messages, schedule=schedule, max_layer=max_layer)
-#
-#
-# @app.route('/web-updates', methods=['GET', 'POST'])
-# def web_updates():
-#     if request.method == 'POST':
-#         if 'bot_change':
-#             bot_handle(True)
-#             return redirect(url_for('web_updates'))
-#     state = get_state_check_bot()
-#     db = get_full_db()
-#     bot_on = bot_handle()
-#     return render_template('check_updates.html', state=state, db=db, bot_on=bot_on)

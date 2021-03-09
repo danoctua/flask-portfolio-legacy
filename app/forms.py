@@ -53,6 +53,8 @@ class WeddingSetupForm(FlaskForm):
     remote_id = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting ID"})
     remote_password = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting password"})
     remote_link = StringField(render_kw={"class": "input-block", "placeholder": "Remote meeting link"})
+    invite_message = TextAreaField(render_kw={"class": "input-block", "id": "wedding-invite-text",
+                                            "placeholder": "Enter invite message you want send to all guests"})
     invitees = FieldList(FormField(WeddingInvitationForm))
     invitees_new = TextAreaField(render_kw={"class": "input-block",
                                             "placeholder": "Enter full names of invitees for each invite in new line"})

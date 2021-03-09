@@ -1327,6 +1327,49 @@ input.btn-block {
   min-height: 25px;
   margin: 0 5px;
 }
+.inline-form :nth-child(2) {
+  flex: 1;
+}
+
+.form-error {
+  color: red;
+}
+
+.form-error:before {
+  content: "! ";
+}
+
+.shadow, .action-button, a.remove-invite-button, .copy-button {
+  -webkit-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  -moz-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+}
+
+.action-button, a.remove-invite-button, .copy-button {
+  height: 30px;
+  margin: 0 0.5em;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: 0.2s;
+  flex-direction: row;
+}
+.action-button a, a.remove-invite-button a, .copy-button a, .action-button span, a.remove-invite-button span, .copy-button span {
+  margin: 0 0.2em;
+}
+
+.copy-button.active {
+  background-color: #abda9f;
+}
+.copy-button.active a, .copy-button.active span {
+  color: green !important;
+}
+
+a.remove-invite-button {
+  color: red !important;
+}
 
 .toolbox-icon {
   display: inline-block;

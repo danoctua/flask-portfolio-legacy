@@ -2,6 +2,11 @@
 
 {% block title %}Setup wedding{% endblock %}
 
+{% block script_include %}
+    <script src="{{ url_for('static', filename='wedding.js') }}?v={{ media_version }}"
+            type="application/javascript"></script>
+{% endblock %}
+
 {% block no_header %}
     <div class="fake-header"></div> {% endblock %}
 
@@ -23,7 +28,7 @@
             <span class="form-error">{{ error }}</span>
         {% endfor %}
 
-        {{ form.time(value=wedding_data.time) }}
+        {{ form.time(value=wedding_data.get_time_display()) }}
         {% for error in form.time.errors %}
             <span class="form-error">{{ error }}</span>
         {% endfor %}
@@ -54,15 +59,37 @@
             <span class="form-error">{{ error }}</span>
         {% endfor %}
 
-        <div class="subsection-header">Invitations</div>
+        <div class="subsection-header">Invite message</div>
+
+        {{ form.invite_message }}
+        {% for error in form.invite_message.errors %}
+            <span class="form-error">{{ error }}</span>
+        {% endfor %}
+
+        <div class="section-header">Invitations</div>
 
 
         {% for invitee in form.invitees %}
             <div class="inline-form">
                 {{ invitee.invited }}
                 {{ invitee.people }}
+                <a href="javascript:void(0)" class="copy-button"
+                   data-link="Для того, чтобы просмотреть больше сведений, посетите эту ссылку: {{ url_for("wedding_page", name=invitee.people.data, _external=True) }}"
+                   data-welcome="Привет, {{ invitee.people.data }}!"
+                >
+                    <span class="material-icons">
+                        content_copy
+                    </span>
+                </a>
+                <a href="javascript:void(0)" class="remove-invite-button">
+                    <span class="material-icons-outlined">
+                        delete
+                    </span>
+                </a>
             </div>
         {% endfor %}
+
+        <div class="subsection-header">Add new invitations</div>
 
         {{ form.invitees_new }}
         {% for error in form.invitees_new.errors %}
@@ -73,3 +100,4 @@
     </form>
 
 {% endblock %}
+

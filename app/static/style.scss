@@ -1421,17 +1421,75 @@ input.btn-block {
 .inline-form {
   display: flex;
   align-items: center;
+
   input {
     display: inline;
   }
+
   input[type='checkbox'] {
     width: 25px;
     height: 25px;
     min-height: 25px;
     margin: 0 5px;
   }
+
+  :nth-child(2) {
+    flex: 1;
+  }
 }
 
+.form-error {
+  color: red;
+}
+
+.form-error:before {
+  content: "! ";
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  -moz-box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+  box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
+}
+
+.action-button {
+  @extend .shadow;
+  //width: 30px;
+  height: 30px;
+  margin: 0 .5em;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  transition: .2s;
+  flex-direction: row;
+
+  a, span {
+    margin: 0 .2em;
+  }
+
+}
+
+.copy-button {
+  @extend .action-button;
+
+  &.active {
+    background-color: #abda9f;
+
+    a, span {
+      color: green!important;
+    }
+  }
+}
+
+
+a.remove-invite-button {
+  @extend .action-button;
+
+  color: red !important;
+
+}
 
 .toolbox-icon {
   display: inline-block;

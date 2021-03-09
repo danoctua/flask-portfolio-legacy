@@ -171,6 +171,7 @@ class Wedding:
     remote_id: str = None
     remote_password: str = None
     remote_link: str = None
+    invite_message: str = None
     invitees: list = []
     output: dict = {}
 
@@ -204,21 +205,22 @@ class Wedding:
             self.save(fp)
             return True
 
-        self.date = data.get("date")
+        self.date = data.get("date", "")
         if self.date:
             try:
                 self.date = datetime.datetime.strptime(self.date, "%m/%d/%Y").date()
             except:
                 self.date = None
-        self.time = data.get("time")
+        self.time = data.get("time", "")
         if self.time:
             try:
                 self.time = datetime.datetime.strptime(self.time, "%H:%M").time()
             except:
                 self.time = None
-        self.remote_id = data.get("remote_id")
-        self.remote_password = data.get("remote_password")
-        self.remote_link = data.get("remote_link")
+        self.remote_id = data.get("remote_id", "")
+        self.remote_password = data.get("remote_password", "")
+        self.remote_link = data.get("remote_link", "")
+        self.invite_message = data.get("invite_message", "")
         self.invitees = [WeddingInvitation(people_=x.get("people"), invited_=x.get("invited"))
                          for x in data.get("invitees")]
         return True
@@ -229,6 +231,7 @@ class Wedding:
         self.remote_id = data.remote_id.data
         self.remote_password = data.remote_password.data
         self.remote_link = data.remote_link.data
+        self.invite_message = data.invite_message.data
         self.invitees = [WeddingInvitation(invitee=x) for x in data.invitees if x]
         for people in data.invitees_new.data.split("\n"):
             if people:
@@ -251,6 +254,7 @@ class Wedding:
             "remote_id": self.remote_id,
             "remote_password": self.remote_password,
             "remote_link": self.remote_link,
+            "invite_message": self.invite_message,
             "invitees": [invitee.parse_to_json() for invitee in self.invitees]
         }
 
