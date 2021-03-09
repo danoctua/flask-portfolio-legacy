@@ -1,4 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Bad+Script:300,400,500,600";
+@import "https://fonts.googleapis.com/css?family=Marck+Script:300,400,500,600";
+@import "https://fonts.googleapis.com/css?family=Caveat:300,400,500,600";
 body {
   font-family: "Bad Script", sans-serif;
   min-height: 100vh;
@@ -33,7 +35,24 @@ body {
   box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
 }
 
+@keyframes invitation-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 .invitation {
+  animation: ease-out 0.5s invitation-appear;
   position: relative;
   z-index: 1;
   padding: 10px 15px;
@@ -43,6 +62,8 @@ body {
   min-height: 300px;
 }
 .invitation h1 {
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 2em;
   color: #303030;
   text-align: center;

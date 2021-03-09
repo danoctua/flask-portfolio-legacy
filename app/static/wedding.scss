@@ -1,4 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Bad+Script:300,400,500,600";
+@import "https://fonts.googleapis.com/css?family=Marck+Script:300,400,500,600";
+@import "https://fonts.googleapis.com/css?family=Caveat:300,400,500,600";
 
 $header-color: #303030;
 $text-color: #212121;
@@ -46,7 +48,27 @@ body {
   box-shadow: 0px 9px 15px 0px rgba(84, 84, 84, 0.2);
 }
 
+@keyframes invitation-appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animated-text {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 .invitation {
+
+  animation: ease-out .5s invitation-appear;
 
   @extend .shadow;
 
@@ -61,9 +83,13 @@ body {
   min-height: 300px;
 
   h1 {
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 2em;
     color: $header-color;
     text-align: center;
+    //animation: animated-text 4s steps(29, end) 1s 1 normal both,
+    //animated-cursor 600ms steps(29, end) infinite;
   }
 
   .header-image-wrapper {

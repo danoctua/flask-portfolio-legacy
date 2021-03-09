@@ -13,7 +13,6 @@ if (currentTheme) {
 
 window.onload = function () {
 
-    console.log("here")
 
     function updateProject(target) {
         if (target.classList.contains("toolbox-icon")) {

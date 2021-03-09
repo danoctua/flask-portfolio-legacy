@@ -18,6 +18,9 @@ window.addEventListener("load", function () {
 
 function copyToClipboard(obj) {
     /* Get the text field */
+    if (obj.classList.contains("active")){
+        return
+    }
     let text = obj.dataset.welcome + "\n";
     text += document.getElementById("wedding-invite-text")?.value || ""
     text += "\n";
