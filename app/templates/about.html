@@ -8,19 +8,32 @@
 
 {% block content %}
     <h2>who</h2>
-    Engineer, minimalist, philanthropist... In general, just a backend developer.
+    Was born and raised in <b>Belarus</b>, moved to <b>Poland</b> in 2017.
+    Native Russian speaker, English, Polish, Ukrainian at the intermediate level.
+    Love to listen music, constantly improving skills with public and private <a style="font-style: italic">"pet projects"</a>.
+    Engineer, minimalist. In general, just a Python developer.
     <h2>what</h2>
     I'm working on developing modern solutions in different fields.
     For a long time working on creating web applications with <b>Python/Flask</b>.
-    Some of my projects are presented and described on this website.
+    Also worked on building scrapping and automation tools with <b>Python/Selenium</b>.
+
     <h2>where</h2>
+    Some of my projects are presented and described on this website.
     You can find them on the <a href="{{ url_for("projects_page") }}">projects page</a>.
     There are projects that I did during my <b>studies</b> at the Poznan University of Technology,
     my <b>personal</b> projects and projects that I've developed during my <b>work</b>.
+    For more, visit my <a href="https://github.com/daniktl">Github</a> profile.
+
     <h2>howto</h2>
-    If you want to <b>hire</b> me or have any propositions about one of my projects,
+    <div class="quote" style="text-align: right; font-size: 90%">
+        Sometimes when you innovate, you make mistakes. It is best to admit them quickly, and get on with improving your
+        other innovations.
+        <div class="quote-source">&copy; Steve Jobs</div>
+    </div>
+    <br>
+    If you want to <b>hire</b> me or have any <b>propositions</b> about one of my projects,
     check the <a href="{{ url_for("contact_page") }}">contact page</a>.
     <h2>p.s.</h2>
-    This page is <b>under construction</b>, so you can find bugs, which you can report,
-    also through the <a href="{{ url_for("contact_page") }}">contact page</a>.
+    This page is <b>under construction</b>, so you can find bugs, which you can report using one of the links on
+    <a href="{{ url_for("contact_page") }}">contact page</a>.
 {% endblock %}
