@@ -68,7 +68,7 @@ body {
 
 .invitation {
 
-  animation: ease-out .5s invitation-appear;
+  animation: ease-out 1.5s invitation-appear;
 
   @extend .shadow;
 
@@ -101,12 +101,11 @@ body {
 
 
     img {
+      @extend .shadow;
       width: 120px;
       height: 120px;
       background-color: white;
-      border: 4px solid #667c59;
       border-radius: 10px;
-
     }
   }
 
@@ -115,7 +114,7 @@ body {
   }
 
   .invitation-footer {
-    padding: 10px 0;
+    padding: 20px 0;
 
     .invitation-footer-item {
       display: flex;

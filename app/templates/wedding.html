@@ -25,9 +25,9 @@
     <div class="v-wrapper">
         <div class="invitation">
             <div class="header-image-wrapper">
-                <img src="" alt="">
+                <img src="{{ url_for("static", filename="wedding-avatar.PNG") }}" alt="">
             </div>
-            <h1>Даниил & Мария</h1>
+            <h1>Мария & Даниил</h1>
 
             <div class="invitation-body">
                 <p>Привет, {{ name }}!</p>
@@ -67,7 +67,11 @@
                 {% endif %}
 
                 <p>
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Свадьба&dates={{ wedding_data.get_datetime().strftime("%Y%m%dT%H%M%S.%fZ") }}/{{ wedding_data.get_datetime_end().strftime("%Y%m%dT%H%M%S.%fZ") }}&details=&location=Zoom&trp=true">Добавь
+                    Чтобы не пропустить ничего важного, можете подписаться на <a href="https://t.me/joinchat/7Cglfg14_A40YWZk">канал в Telegram</a>.
+                </p>
+
+                <p>
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Свадьба+Марии+и+Даниила&dates={{ wedding_data.get_datetime().strftime("%Y%m%dT%H%M%S.%fZ") }}/{{ wedding_data.get_datetime_end().strftime("%Y%m%dT%H%M%S.%fZ") }}&details=&location=Zoom&trp=true">Добавь
                         напоминание в свой календарь</a>
                 </p>
 
