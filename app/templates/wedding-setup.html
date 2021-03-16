@@ -74,7 +74,7 @@
                 {{ invitee.invited }}
                 {{ invitee.people }}
                 <a href="javascript:void(0)" class="copy-button"
-                   data-link="Ваше приглашение находится по ссылке ниже:\n{{ url_for("wedding_page", name=invitee.people.data, _external=True) }}"
+                   data-link="Ваше приглашение находится по следующей ссылке: {{ url_for("wedding_page", name=invitee.people.data, _external=True) }}"
                    data-welcome="Привет, {{ invitee.people.data }}!"
                 >
                     <span class="material-icons">
