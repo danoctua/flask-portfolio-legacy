@@ -23,7 +23,7 @@ function copyToClipboard(obj) {
     }
     let text = obj.dataset.welcome + "\n";
     text += document.getElementById("wedding-invite-text")?.value || ""
-    text += "\n";
+    // text += "\n";
     text += decodeURIComponent(obj.dataset.link);
     copyTextToClipboard(text);
     obj.classList.add("active");
